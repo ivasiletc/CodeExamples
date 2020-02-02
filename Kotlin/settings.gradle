@@ -1,0 +1,4 @@
+rootProject.name = 'unikino'
+include 'domain'
+include 'boot-module'
+include 'gui'
