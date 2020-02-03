@@ -1,0 +1,23 @@
+testVal := 1234;
+testVal :="rrr";
+testVal := rr;
+testVal:="rrr";
+
+print(1111);
+print("test");
+print("11111");
+print(test);
+
+if true then print();
+if false then print();
+if true then print() else print();
+
+while true do print();
+do print() while false;
+
+val:= readint
+12345;
+val:= readint
+6666;
+val:= readint
+-1111;
