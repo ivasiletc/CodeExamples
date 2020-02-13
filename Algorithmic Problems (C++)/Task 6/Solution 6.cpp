@@ -7,12 +7,12 @@ int getNum()
 {
     int i = 0;
     int c = getchar_unlocked();
-    if (c == EOF) 
+    if (c == EOF)
     {
         return -1;
     }
 
-    while (c >= 48 && c <= 57) 
+    while (c >= 48 && c <= 57)
     {
         i = (i << 3) + (i << 1) + c - 48;
         c = getchar_unlocked();
@@ -29,7 +29,7 @@ struct Element
 
 Element* POS;
 
-int main() 
+int main()
 {
 
     int length = 0;
@@ -38,7 +38,7 @@ int main()
     POS = new Element();
 
     POS->value = getNum();
-    if (POS->value == -1) 
+    if (POS->value == -1)
     {
         printf("-1");
         return 0;
@@ -46,7 +46,7 @@ int main()
 
     length++;
     Element* last = POS;
-    while (true) 
+    while (true)
     {
         Element* num = new Element();
         num->value = getNum();
@@ -76,13 +76,13 @@ int main()
             delete tmp;
             length--;
         }
-        else 
+        else
         {
             tmp = new Element();
             tmp->value = POS->value - 1;
             tmp->next = POS->next;
             POS->next = tmp;
-            for (int j = POS->value; j > 0; --j) 
+            for (int j = POS->value; j > 0; --j)
             {
                 POS = POS->next;
             }
