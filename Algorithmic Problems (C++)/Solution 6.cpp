@@ -50,6 +50,7 @@ int main()
     {
         Element* num = new Element();
         num->value = getNum();
+
         if (num->value == -1)
         {
             break;
