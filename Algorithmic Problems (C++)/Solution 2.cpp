@@ -1,19 +1,20 @@
 #include <stdio.h>
 #include <string.h>
+
 struct Uzel;
 
 Uzel* aktualnyUzel;
 
 char result[65];
 char tmpSlowo[65];
-//Дерево----------------------------------------------------
+//Tree
 struct Uzel {
     char value;
     Uzel* right;
     Uzel* left;
     Uzel* parent;
-    //----------------------------------------------------------
-    //Алгоритм--------------------------------------------------
+
+    //Algorhytm
     void search() {
         if (this->left) {
             this->left->search();
@@ -37,17 +38,14 @@ struct Uzel {
         }
     }
 };
-//--------------------------------------------------------------------
+
 int main() {
     char tmpChar;
     char lastChar = getchar_unlocked();
 
     Uzel* start = new Uzel();
-    // (Я тупой)
     aktualnyUzel = start;
 
-    //Считывание + проход по дереву----------------------------------------
-    //(Я очень тупой)
     while (tmpChar != EOF) {
         tmpChar = getchar_unlocked();
         if (tmpChar >= 'a' && tmpChar <= 'z') {
@@ -72,8 +70,7 @@ int main() {
     }
     aktualnyUzel->value = lastChar;
     start->search();
-    //--------------------------------------------------------------------
-    //Вывод результата----------------------------------------------------
+
     printf("%s", result);
 
     return 0;
