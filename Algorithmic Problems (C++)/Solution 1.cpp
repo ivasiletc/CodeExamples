@@ -13,6 +13,7 @@ int main() {
     read(0, input, 100000000);
     int i = 0;
 
+    //get values from input
     while (input[i] >= 48 && input[i] <= 57) {
         currentNumber = (currentNumber << 3) + (currentNumber << 1) + input[i] - 48;
         i++;
@@ -22,6 +23,7 @@ int main() {
     previousNumber = currentNumber;
     currentNumber = 0;
 
+    //get values from input
     while (input[i] != '\0') {
         while (input[i] >= 48 && input[i] <= 57) {
             currentNumber = (currentNumber << 3) + (currentNumber << 1) + input[i] - 48;
@@ -29,7 +31,7 @@ int main() {
         }
         i++;
 
-        //-------------Алгоритм---------------
+        //Main part
         if (currentNumber > previousNumber) {
             if (isIncreased) {
                 currentLength++;
