@@ -1,0 +1,370 @@
+ZADANIE
+
+Rozwazmy mape drogowa zawierajaca n miejscowosci M(0),M(1),…,M(n-1). Zadaniem jest pokonanie samochodem cyklicznej trasy M(0)>M(1)>…>M(n-1)>M(0), z wybranej przez nas miejscowosci M(start), gdzie start=0,1,…,n-1, tak, by finalnie powrocic do miejscowosci, z ktorej wystartowalismy. Zakladamy, ze kazda z drog laczaca pary kolejnych miejscowosci M(i) oraz M((i+1)%n), dla i=0,1,…,n-1, na zaplanowanej trasie, nie przechodzi przez zadna inna miejscowosc.
+
+W kazdej z rozwazanych miejscowosci M(i), znajduje sie stacja benzynowa, na ktorej mozemy zatankowac do baku samochodu dokladnie t(i) litrow paliwa (zakladamy, ze bak samochodu ma nieograniczona pojemnosc i poczatkowo jest pusty). Natomiast pokonanie drogi laczacej miasta M(i) oraz M((i+1)%n) wymaga zuzycia s(i) litrow paliwa. Wiemy dodatkowo, ze t(0)+t(1)+…+t(n-1)=s(0)+s(1)+…s(n-1), tj. laczna liczba litrow paliwa dostepnego w stacjach benzynowych na zaplanowanej przez nas trasie jest rowna lacznej liczbie litrow paliwa niezbednego do jej przebycia.
+
+Wskaz najmniejszy mozliwy indeks miasta startowego M(start), ktorego wybor gwarantuje realizacje zaplanowanej trasy cyklicznej. Dodatkowo podaj maksymalna liczbe litrow paliwa znajdujacego sie w baku samochodu tuz po przejechaniu dowolnego odcinka zaplanowanej trasy cyklicznej.
+
+ 
+
+WEJSCIE
+
+Wiersz zawierajacy liczbe n zakonczony znakiem nowej linii (kod ASCII 10), Nastepnie n wierszy reprezentujacych parametry t(i) oraz s(i) kolejnych miast M(i), dla i=0,1,…,n-1, w ktorych elementy rozdzielone sa znakiem odstepu (kod ASCII 32), a kazdy wiersz zakonczony jest znakiem nowej linii.
+
+ 
+
+WYJSCIE
+
+Wiersz zakonczony znakiem nowej linii, zawierajacy dwie liczby naturalne oddzielone znakiem odstepu, stanowiace rozwiazanie problemu.
+
+Dodatkowo: wiersz zawierajacy liczbe kontrolna rowna liczbie znakow wlasciwych wczytanych z wejscia (znak wlasciwy to kazdy znak niebedacy znakiem bialym, tj. znak odstepu, znak nowej linii, znak tabulacji, oraz znakiem konca pliku, tj. EOF).
+
+ 
+
+OGRANICZENIA
+
+Liczba n miast zawarta w przedziale od 1 do 10^7. Liczba litrow paliwa dostepnego na danej stacji benzynowej, jak i paliwa niezbednego do pokonania drogi z danego miasta trasy do nastepnego, nie wieksza niz 10^9.
+
+ 
+
+PRZYKLAD 1
+
+wejscie:
+
+6
+
+
+9 15
+
+
+7 3
+
+
+7 14
+
+
+2 3
+
+
+4 0
+
+
+7 1
+
+wyjscie:
+
+4 10
+
+
+15
+
+ 
+
+/* KOMENTARZ DO ROZWIAZANIA
+
+
+Startujac z miasta o indeksie 1 otrzymujemy kolejne stany liczby litrow paliwa w zbiorniku samochodu:
+
+
+ 0 (stan poczatkowy),
+
+
+ 7 (zatankowalismy w miescie M(1))
+
+
+ 4 (przejechalismy z miasta M(1) do miasta M(2))
+
+
+ 11 (zatankowalismy w miescie M(2))
+
+
+ -3 (wyjechalismy z miasta M(2), ale nie dotarlismy do miasta M(3)), brak paliwa, koniec podrozy. Wybralismy bledne miasto startowe.
+
+
+Startujac z miasta o indeksie 4 otrzymujemy kolejne stany liczby litrow paliwa w zbiorniku samochodu:
+
+
+ 0 (stan poczatkowy),
+
+
+ 4 (zatankowalismy w miescie M(4))
+
+
+ 4 (przejechalismy z miasta M(4) do miasta M(5))
+
+
+ 11 (zatankowalismy w miescie M(5))
+
+
+ 10 (przejechalismy z miasta M(5) do miasta M(0))
+
+
+ 19 (zatankowalismy w miescie M(0))
+
+
+ 4 (przejechalismy z miasta M(0) do miasta M(1))
+
+
+11 (zatankowalismy w miescie M(1))
+
+
+ 8 (przejechalismy z miasta M(1) do miasta M(2))
+
+
+15 (zatankowalismy w miescie M(2))
+
+
+ 1 (przejechalismy z miasta M(2) do miasta M(3))
+
+
+ 3 (zatankowalismy w miescie M(3))
+
+
+ 0 (przejechalismy z miasta M(3) do miasta M(4)), koniec podrozy. Wybralismy poprawne miasto startowe.
+
+
+Ostatecznie indeks poszukiwanego miasta to 4, maksymalna liczba litrow paliwa w baku samochodu po przejechaniu dowolnego odcinka zaplanowanej trasy to 10.
+
+
+Dodatkowo z wejscia wczytano lacznie 15 znakow wlasciwych. */
+
+ 
+
+PRZYKLAD 2
+
+wejscie:
+
+20
+
+
+35 0
+
+
+2 33
+
+
+10 67
+
+
+74 75
+
+
+25 49
+
+
+80 76
+
+
+73 74
+
+
+78 40
+
+
+87 4
+
+
+7 0
+
+
+68 82
+
+
+73 89
+
+
+78 62
+
+
+8 78
+
+
+38 7
+
+
+25 26
+
+
+71 21
+
+
+66 82
+
+
+9 74
+
+
+96 64
+
+wyjscie:
+
+5 131
+
+
+74
+
+ 
+
+PRZYKLAD 3
+
+wejscie:
+
+50
+
+
+125 66
+
+
+682 1111
+
+
+307 818
+
+
+845 254
+
+
+975 1086
+
+
+986 677
+
+
+166 774
+
+
+182 1172
+
+
+255 656
+
+
+700 572
+
+
+921 1089
+
+
+269 0
+
+
+184 1157
+
+
+663 491
+
+
+729 0
+
+
+352 0
+
+
+645 0
+
+
+956 1060
+
+
+472 734
+
+
+242 1014
+
+
+928 750
+
+
+66 281
+
+
+507 603
+
+
+681 0
+
+
+852 187
+
+
+401 417
+
+
+707 0
+
+
+659 1042
+
+
+913 18
+
+
+411 870
+
+
+752 617
+
+
+742 0
+
+
+670 805
+
+
+697 801
+
+
+589 810
+
+
+820 559
+
+
+332 0
+
+
+330 222
+
+
+412 1071
+
+
+697 144
+
+
+700 980
+
+
+55 517
+
+
+410 366
+
+
+942 1075
+
+
+928 721
+
+
+211 1101
+
+
+30 15
+
+
+866 274
+
+
+221 780
+
+
+734 162
+
+wyjscie:
+
+13 3835
+
+
+291

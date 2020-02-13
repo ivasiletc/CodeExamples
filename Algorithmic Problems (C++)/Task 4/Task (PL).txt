@@ -1,0 +1,432 @@
+ZADANIE
+
+Rozwazmy zbior P={p(0), p(1), ..., p(n-1)} skladajacy sie z n spolecznosci lokalnych, dla ktorych ustalona jest relacja bezposredniego sasiedztwa. Ze zbioru P wybieramy k roznych elementow, ktore beda stanowily punkty startowe kampanii wyborczych k kandydatow q(0), q(1), ..., q(k-1). Dalej proces realizacji kampanii wyborczych przebiega w turach tak, ze:
+
+ - tura 0: kazdy z kandydatow q(j) dla 0<=j<=k-1 zaklada w punkcie startowym swojej kampanii sztab wyborczy,
+
+ - ...
+
+ - tura i, krok I: kazdy z kandydatow z kazdego sztabu wyborczego zlokalizowanego w dowolnej spolecznosci p(j) dla 0<=j<=n-1, odwiedza wszystkie spolecznosci bezposrednio sasiednie z w/w elementem zbioru P, gdzie zaklada swoje komitety wyborcze, pod warunkiem, ze nie ma w nich juz wlasnych sztabow wyborczych, badz sztabow wyborczych innych kandydatow,
+
+ - tura i, krok II: w kazdej spolecznosci p(j) dla 0<=j<=n-1, dla ktorej zalozony jest komitet wyborczy co najmniej jednego kandydata odbywaja sie prawybory, w ktorych zwycieza ten kandydat, ktorego liczba sztabow wyborczych w spolecznosciach bezposrednio sasiednich (stan z poczatku i-tej tury) ze spolecznoscia p(j) jest:
+
+ -- wariant A: najmniejsza (w przypadku remisu wygrywa kandydat o wiekszej wartosci indeksu l dla q(l)),
+
+ -- wariant B: najwieksza (w przypadku remisu wygrywa kandydat o mniejszej wartosci indeksu l dla q(l)).
+
+ - tura i, krok III: zwyciestwo w prawyborach w danej spolecznosci uprawnia kandydata do zalozenia sztabu wyborczego w miejsce komitetu wyborczego,
+
+ - ...
+
+i konczy sie z chwila, gdy kazda nastepna tura realizacji kampanii wyborczych nie zmienia ustalonej wczesniej postaci przypisania sztabow wyborczych do elementow rozwazanego zbioru P spolecznosci lokalnych.
+
+Ustal finansowanie kosztow kampanii wyborczej, w zaleznosci od przyjetego wariantu rozstrzygania prawyborow (wariant A albo wariant B), dla kazdego z k kandydatow, jezeli koszty kampanii wyborczej mierzymy ostateczna liczba zalozonych sztabow wyborczych w obrebie rozwazanego zbioru spolecznosci lokalnych P.
+
+ 
+
+WEJSCIE
+
+Kolejno:
+
+ - liczba naturalna reprezentujaca liczbe n spolecznosci lokalnych, znak nowej linii (kod ASCII 10),
+
+ - ciag m wierszy postaci liczba naturalna x znak odstepu (kod ASCII 32) liczba naturalna y znak nowego wiersza, zakonczony wierszem specjalnym postaci -1 znak odstepu -1 znak nowej linii, z ktorych kazdy wlasciwy wiersz definiuje bezposrednie sasiedztwo spolecznosci lokalnych indeksowanych kolejno liczbami x i y (uwaga! sasiedztwo definiowane jest jednokrotnie, tj. jezeli krawedzi (x,y) tworzy sasiedztwo, to krawedz (y,x) do sasiedztwa nie nalezy),
+
+ - liczba naturalna opisujaca liczbe k kandydatow, znak nowej linii,
+
+ - ciag k wierszy postaci liczba naturalna z znak nowej linii, gdzie liczba z zawarta w i-tym wierszu reprezentuje indeks punktu startowego (spolecznosci lokalnej) kazdego kolejnego kandydata poczawszy od kandydata q(0).
+
+ 
+
+WYJSCIE
+
+Ciag k wierszy postaci liczba naturalna a znak odstepu liczba naturalna b znak nowej linii, z ktorych kazdy reprezentuje kolejno koszt kampanii wyborczej w wariancie A (wartosc a) i w wariancie B (wartosc b) kazdego kolejnego kandydata poczawszy od kandydata q(0).
+
+Dodatkowo: wiersz zawierajacy liczbe kontrolna rowna liczbie znakow wlasciwych wczytanych z wejscia (znak wlasciwy to kazdy znak niebedacy znakiem bialym, tj. znak odstepu, znak nowej linii, znak tabulacji, oraz znakiem konca pliku, tj. EOF).
+
+ 
+
+OGRANICZENIA
+
+Liczby kolejno spolecznosci n jak i kandydatow k, zawarte w przedziale [1,10^5]. Rozmiar m relacji sasiedztwa spolecznosci lokalnych nie wiekszy niz 10^7.
+
+ 
+
+PRZYKLAD 1
+
+wejscie:
+
+3
+
+
+0 1
+
+
+1 2
+
+
+0 2
+
+
+-1 -1
+
+
+2
+
+
+0
+
+
+1
+
+wyjscie:
+
+1 2
+
+
+2 1
+
+
+14
+
+ 
+
+/* KOMENTARZ DO ROZWIAZANIA
+
+
+Przebieg algorytmu:
+
+
+  tura 0: stan sztabow wyborczych w spolecznosciach
+
+
+    p(0) – sztab wyborczy kandydata 0
+
+
+    p(1) – sztab wyborczy kandydata 1
+
+
+    p(2) – brak 
+
+
+  tura 1, krok 1: stan komitetow wyborczych w spolecznosciach
+
+
+    p(0) – brak
+
+
+    p(1) – brak
+
+
+    p(2) – komitety wyborcze kandydatow 0 i 1
+
+
+  tura 1, krok 2: wynik prawyborow w spolecznosciach
+
+
+    p(0) – brak
+
+
+    p(1) – brak
+
+
+    p(2) – wariant A: wygrywa kandydat 1
+
+
+         - wariant B: wygrywa kandydat 0 
+
+
+  tura 1, krok 3: stan sztabow wyborczych w spolecznosciach
+
+
+    p(0) – sztab wyborczy kandydata 0
+
+
+    p(1) – sztab wyborczy kandydata 1
+
+
+    p(2) – wariant A: sztab wyborczy kandydata 1
+
+
+         - wariant B: sztab wyborczy kandydata 0
+
+
+Koniec algorytmu.
+
+
+Koszt kampanii wyborczej:
+
+
+  kandydat 0 – wariant A: 1
+
+
+             - warrant B: 2
+
+
+  kandydat 1 – wariant A: 2
+
+
+             - warrant B: 1
+
+
+Dodatkowo z wejscia wczytano lacznie 14 znakow wlasciwych. */
+
+ 
+
+PRZYKLAD 2
+
+wejscie:
+
+6
+
+
+1 0
+
+
+2 1
+
+
+3 0
+
+
+3 1
+
+
+3 2
+
+
+4 2
+
+
+4 3
+
+
+5 0
+
+
+5 2
+
+
+-1 -1
+
+
+3
+
+
+0
+
+
+1
+
+
+5
+
+wyjscie:
+
+1 3
+
+
+2 2
+
+
+3 1
+
+
+27
+
+ 
+
+PRZYKLAD 3
+
+wejscie:
+
+20
+
+
+3 0
+
+
+5 1
+
+
+6 1
+
+
+7 4
+
+
+7 5
+
+
+8 4
+
+
+10 3
+
+
+10 9
+
+
+11 5
+
+
+11 8
+
+
+12 4
+
+
+12 5
+
+
+12 6
+
+
+12 10
+
+
+13 1
+
+
+13 3
+
+
+13 5
+
+
+14 1
+
+
+14 6
+
+
+14 7
+
+
+15 12
+
+
+15 13
+
+
+15 14
+
+
+16 4
+
+
+16 8
+
+
+16 9
+
+
+16 13
+
+
+17 0
+
+
+17 2
+
+
+17 5
+
+
+17 7
+
+
+17 15
+
+
+18 5
+
+
+18 7
+
+
+19 3
+
+
+19 4
+
+
+19 7
+
+
+19 10
+
+
+19 13
+
+
+19 14
+
+
+-1 -1
+
+
+10
+
+
+3
+
+
+2
+
+
+19
+
+
+5
+
+
+15
+
+
+14
+
+
+4
+
+
+8
+
+
+17
+
+
+11
+wyjscie:
+
+1 5
+
+
+1 1
+
+
+2 2
+
+
+2 4
+
+
+2 1
+
+
+3 2
+
+
+2 2
+
+
+3 1
+
+
+3 1
+
+
+1 1
+
+
+146

@@ -1,0 +1,222 @@
+ZADANIE
+
+Niech M będzie kwadratową macierzą binarną rozmiaru n indeksowaną wierszowo i kolumnowo liczbami 0,1,…,n-1. Ścieżką cykliczną w macierzy M nazywamy sekwencję jej elementów M[r_0,c_0], M[r_1,c_1],…,M[r_i,c_i],…,M[r_0,c_0], w której indeksy wiersz wyrazów składowych  r_0, r_1,…,r_i,… z wyłaczeniem wyrazu ostatniego r_0, tworzą ciąg niemalejący i jednocześnie wyczerpują zbiór kolejnych liczb naturalnych od 0 do n-1 włącznie. Dodatkowo ścieżkę cykliczną konstruujemy zgodnie z poniższymi regułami:
+
+ - jeżeli M[r_i,c_i]=1 to r_(i+1)=r_i oraz
+
+ 
+
+c_(i+1)= c_i-1, dla c_i>0 bądź c_(i+1)=n-1, dla c_i=0
+
+ 
+
+albo
+
+ 
+
+c_(i+1)= c_i+1, dla c_i<n-1 bądź c_(i+1)=0, dla c_i=n-1
+
+ 
+
+ - jeżeli M[r_i,c_i]=0  to c_(i+1)=c_i oraz
+
+ 
+
+r_(i+1)= r_i+1, dla r_i<n-1 bądź r_(i+1)=0, dla r_i=n-1.
+
+ 
+
+Dla podanego elementu macierzy M[r_0,c_0] wyznacz ścieżkę cykliczną, której początek i koniec znajdują się w tym elemencie, o minimalnej możliwej sumie wszystkich jej wyrazów składowych. Ustal tę sumę.
+
+ 
+
+WEJŚCIE
+
+Wiersz zawierający liczby n i c_0 (indeks kolumny wybranego elementu macierzy M[r_0,c_0]) oddzielone znakiem odstępu (kod ASCII 32) zakończony znakiem nowej linii (kod ASCII 10). Następnie n wierszy reprezentujących kolejne wiersze macierzy M (tj. ciągi binarne), w których elementy rozdzielone są znakiem odstępu a każdy wiersz zakończony jest znakiem nowej linii.
+
+ 
+
+WYJŚCIE
+
+Liczba naturalna będąca rozwiązaniem zadania. W przypadku braku rozwiązania, słowo ERROR oraz po znaku odstępu liczba naturalna reprezentująca największy możliwy indeks wierszowy elementu macierzy należącego do skonstruowanego fragmentu rozważanej ścieżki cyklicznej.
+
+ 
+
+OGRANICZENIA
+
+Liczba n zawarta w przedziale od 2 do 10^4.
+
+ 
+
+LIMITY
+
+Oczekiwana złożoność czasowa rzędu O(kn), gdzie k jest łączną liczbą elementów macierzy M równych 0. Oczekiwana złożoność pamięciowa rzędu O(n).
+
+ 
+
+PRZYKŁAD 1
+
+wejście:
+
+5 0
+
+
+0 1 1 1 0
+
+
+1 1 0 1 1
+
+
+1 0 1 0 0
+
+
+1 1 1 1 0
+
+
+1 1 0 0 1
+
+wyjście:
+
+8
+
+ 
+
+/* KOMENTARZ DO ROZWIĄZANIA
+
+
+Poszukiwana ścieżka wysokości h(M)=5 (z dokładnością do sumy elementów) w macierzy M ma postać:
+
+
+(wiersz 0) 0 - - - -
+
+
+(wiersz 1) 1 1 0 - -
+
+
+(wiersz 2) - - 1 0 -
+
+
+(wiersz 3) - - - 1 0
+
+
+(wiersz 4) - - - 0 1
+
+
+(wiersz 0) 0 1 1 1 -
+
+
+Suma elementów ścieżki to 8. */
+
+ 
+
+PRZYKŁAD 2
+
+wejście:
+
+10 9
+
+
+0 1 0 1 1 1 1 0 1 1
+
+
+0 1 1 1 0 0 0 0 0 0
+
+
+1 1 1 1 1 1 1 1 0 1
+
+
+1 1 1 1 1 1 1 1 1 1
+
+
+1 1 1 1 1 1 0 1 1 0
+
+
+1 1 0 1 0 0 0 0 1 1
+
+
+0 1 0 1 1 1 1 1 1 1
+
+
+0 1 0 1 1 1 1 1 0 0
+
+
+1 1 1 1 1 1 0 1 0 1
+
+
+1 0 0 1 1 1 0 0 0 1
+
+wyjście:
+
+ERROR 3
+
+ 
+
+PRZYKŁAD 3
+
+wejście:
+
+20 10
+
+
+0 1 1 0 1 1 1 1 1 1 1 1 1 0 1 1 0 1 1 1
+
+
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1
+
+
+1 1 1 1 1 1 1 1 0 1 1 1 1 1 1 0 0 0 1 1
+
+
+1 1 1 1 1 0 1 1 0 0 1 1 0 1 1 1 1 1 1 1
+
+
+1 1 1 1 1 1 1 0 1 1 1 1 1 0 0 1 1 0 1 1
+
+
+1 1 1 1 1 1 0 0 1 1 1 1 1 0 0 1 0 0 1 1
+
+
+1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+
+
+1 0 1 1 1 0 1 1 1 1 1 1 1 1 1 0 1 1 0 0
+
+
+0 0 1 1 1 0 1 1 1 1 1 1 1 1 0 1 1 0 1 1
+
+
+1 0 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 1 1 0
+
+
+0 1 1 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1
+
+
+1 1 1 1 1 1 1 0 1 1 1 1 1 0 1 0 1 1 1 1
+
+
+1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+
+
+1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1
+
+
+0 0 1 1 1 1 0 1 0 0 0 1 1 1 1 1 1 1 1 1
+
+
+1 1 0 1 1 1 1 1 1 1 0 0 0 1 1 1 1 1 1 1
+
+
+1 1 1 1 1 1 1 1 0 1 0 1 1 1 0 0 0 1 0 1
+
+
+1 1 1 1 1 1 0 1 0 1 1 1 1 1 1 1 1 1 1 1
+
+
+1 1 1 1 1 1 1 1 1 1 1 1 0 1 0 1 1 0 0 1
+
+
+1 1 1 0 1 1 0 1 1 1 1 1 1 1 1 1 1 1 0 1
+
+wyjście:
+
+57

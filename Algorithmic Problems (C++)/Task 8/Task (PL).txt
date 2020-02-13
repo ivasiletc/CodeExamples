@@ -1,0 +1,292 @@
+ZADANIE
+
+Rozważmy zbiór wszystkich możliwych multizbiorów nad zbiorem liczb naturalnych. Definiujemy dwa operatory dla tak określonej dziedziny:
+
+ - |E,e|, obcięcie multizbioru E do pierwszych e elementów zapisanych w kolejności niemalejącej, np.
+
+|{0,3,2,2,0},3|=|{0,0,2,2,3},3|={0,0,2},
+
+ - [E,F,G,e], suma alternatywna z obcięciem multizbiorów E oraz F, albo E oraz G, taka, że:
+
+[E,F,G,e]=|E+F,e|, jeżeli suma elementów multizbioru E jest parzysta,
+
+[E,F,G,e]=|E+G,e|, jeżeli suma elementów multizbioru E jest nieparzysta,
+
+gdzie + jest klasycznym operatorem sumy multizbiorów, np.
+
+[{0,2},{1,2},{0,3},3]=|{0,2}+{1,2},3|=|{0,2,1,2},3|=|{0,1,2,2},3|={0,1,2}.
+
+Dalej jest X={x(0), x(1), …, x(n-1)} jest rodziną n niepustych multizbiorów nad zbiorem liczb naturalnych oraz m jest pewną ustaloną dodatnią liczbą naturalną. Wyznacz sumę elementów multizbioru będącego rezultatem k-krotnego złożenia operatora sumy alternatywnej z obcięciem na zbiorze pustym {}, takiego, że
+
+[…[[{},x(i_0),x(j_0),m],x(i_1),x(j_1),m]…,x(i_(k-1)),x(j_(k-1)),m],
+
+gdzie 0<=i_p,j_q<n, dla 0<=p,q<k. Dodatkowo podaj liczbę różnych elementów multizbioru będącego rezultatem tego złożenia.
+
+ 
+
+WEJŚCIE
+
+Wiersz zawierający liczby n, m oraz k oddzielone znakiem odstępu (kod ASCII 32) i zakończony znakiem nowej linii (kod ASCII 10). Następnie n wierszy reprezentujących elementy kolejnych multizbiorów x(i), dla 0<=i<n, poprzedzone liczbą określającą rozmiar danego multizbioru oraz znakiem odstępu. Elementy wierszy rozdzielone są znakiem odstępu, a każdy wiersz zakończony jest znakiem nowej linii. Dalej k wierszy reprezentujący pary indeksów multizbiorów należących do rodziny X odpowiadające kolejności ich występowania w rozważanym złożeniu operatora sumy alternatywnej z obcięciem (czytane od lewej do prawej strony). Elementy wierszy rozdzielone są znakiem odstępu, a każdy wiersz zakończony jest znakiem nowej linii.
+
+ 
+
+WYJŚCIE
+
+Wiersz zakończony znakiem nowej linii zawierający dwie liczby naturalne oddzielone znakiem odstępu stanowiące rozwiązanie problemu.
+
+Dodatkowo: wiersz zawierający liczbę kontrolną równą liczbie znaków właściwych wczytanych z wejścia (znak właściwy to każdy znak niebędący znakiem białym, tj. znak odstępu, znak nowej linii, znak tabulacji, oraz znakiem końca pliku, tj. EOF).
+
+ 
+
+OGRANICZENIA
+
+Liczby n i m zawarte w przedziałach odpowiednio [1,10^3] i [1,10^7].  Krotność k analizowanego złożenia ograniczona od dołu przez 1 i od góry przez 10^7. Rozmiar multizbiorów z rodziny X oraz wartość maksymalnego elementu należącego do wymienionych multizbiorów ograniczone przedziałami kolejno [1,10^4] i [0,10^7]. 
+
+
+PRZYKŁAD 1
+
+wejście:
+
+3 5 4
+
+
+1 1
+
+
+5 0 8 5 8 9
+
+
+5 1 0 3 1 2
+
+
+0 1
+
+
+1 0
+
+
+0 2
+
+
+2 1
+
+wyjście:
+
+8 3
+
+
+25
+
+ 
+
+/* KOMENTARZ DO ROZWIĄZANIA
+
+
+Zgodnie z danymi wejściowymi zachodzi
+
+
+x(0)={1}
+
+
+x(1)={0,8,5,8,9}
+
+
+x{2}={1,0,3,1,2}
+
+
+Dalej, rozważane 4 krotne złożenie operatora sumy alternatywnej z obcięciem na zbiorze pustym, gdzie m=5, ma postać:
+
+
+krok nr 1: [{},x{0},x{1},5]=|{}+x{0},5|={1}
+
+
+krok nr 2: [{1},x{1},x{0},5]=|{1}+x{0},5|={1,1}
+
+
+krok nr 3: [{1,1},x{0},x{2},5|=|{1,1}+x{0},5|={1,1,1}
+
+
+krok nr 4: [{1,1,1},x{2},x{1},5|=|{1,1,1}+x{1},5|=|{0,1,1,1,5,8,8,9},5|={0,1,1,1,5}
+
+
+Stąd suma elementów multizbioru będącego rezultatem rozważanego złożenia jest równa 8, a sam multizbiór składa się z elementów o trzech różnych wartościach.
+
+
+Zatem odpowiedź stanowi dwójka liczb 8 oraz 3.
+
+
+Dodatkowo z wejścia wczytano łącznie 25 znaków właściwych. */
+
+ 
+
+PRZYKŁAD 2
+
+wejście:
+
+6 10 10
+
+
+7 9 9 7 3 9 3 1
+
+
+4 6 8 5 2
+
+
+7 8 6 9 6 7 3 1
+
+
+4 1 9 0 3
+
+
+9 9 8 8 8 6 4 3 3 6
+
+
+4 1 9 5 6
+
+
+1 3
+
+
+1 4
+
+
+1 4
+
+
+0 4
+
+
+5 4
+
+
+3 4
+
+
+1 5
+
+
+4 1
+
+
+4 5
+
+
+5 4
+
+wyjście:
+
+22 3
+
+
+66
+
+ 
+
+PRZYKŁAD 3
+
+wejście:
+
+12 20 20
+
+
+20 1 8 4 5 8 7 3 8 3 1 4 1 2 9 3 9 3 8 4 6
+
+
+4 2 2 7 2
+
+
+16 0 1 9 1 8 7 4 1 7 7 5 9 9 5 2 1
+
+
+20 7 6 4 0 8 1 3 9 8 1 8 7 3 6 6 9 5 9 6 6
+
+
+15 7 4 2 7 9 6 7 6 3 9 8 3 5 8 0
+
+
+12 1 4 9 1 9 8 9 5 0 6 7 9
+
+
+12 5 2 1 6 7 2 9 4 9 4 5 9
+
+
+7 3 7 9 6 9 8 8
+
+
+9 8 1 7 9 9 4 8 7 5
+
+
+10 6 1 2 0 2 0 2 1 0 7
+
+
+3 5 1 8
+
+
+1 0
+
+
+1 11
+
+
+7 1
+
+
+2 5
+
+
+8 6
+
+
+11 0
+
+
+9 9
+
+
+7 9
+
+
+4 1
+
+
+0 3
+
+
+5 10
+
+
+9 7
+
+
+6 10
+
+
+9 3
+
+
+8 9
+
+
+5 1
+
+
+2 10
+
+
+8 8
+
+
+7 2
+
+
+9 1
+
+
+6 4
+
+wyjście:
+
+0 1
+
+
+199
