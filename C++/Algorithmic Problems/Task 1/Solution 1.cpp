@@ -3,7 +3,8 @@
 
 using namespace std;
 
-int main() {
+int main()
+{
     int previousNumber = 0, currentNumber = 0;
     int tmpLength = 1, currentLength = 1, maxLength = 1;
     long long currentSum = 0, maxSum = 0;
@@ -14,7 +15,8 @@ int main() {
     int i = 0;
 
     //get values from input
-    while (input[i] >= 48 && input[i] <= 57) {
+    while (input[i] >= 48 && input[i] <= 57)
+    {
         currentNumber = (currentNumber << 3) + (currentNumber << 1) + input[i] - 48;
         i++;
     }
@@ -25,21 +27,24 @@ int main() {
 
     //get values from input
     while (input[i] != '\0') {
-        while (input[i] >= 48 && input[i] <= 57) {
+        while (input[i] >= 48 && input[i] <= 57)
+        {
             currentNumber = (currentNumber << 3) + (currentNumber << 1) + input[i] - 48;
             i++;
         }
         i++;
 
         //Main part
-        if (currentNumber > previousNumber) {
+        if (currentNumber > previousNumber)
+        {
             if (isIncreased) {
                 currentLength++;
                 currentSum += currentNumber;
             }
             else {
                 isIncreased = true;
-                if (currentLength > maxLength) {
+                if (currentLength > maxLength)
+                {
                     maxLength = currentLength;
                     maxSum = currentSum;
                 }
@@ -48,14 +53,18 @@ int main() {
             }
             tmpLength = 1;
         }
-        else if (currentNumber < previousNumber) {
-            if (!isIncreased) {
+        else if (currentNumber < previousNumber)
+        {
+            if (!isIncreased)
+            {
                 currentLength++;
                 currentSum += currentNumber;
             }
-            else {
+            else
+            {
                 isIncreased = false;
-                if (currentLength > maxLength) {
+                if (currentLength > maxLength)
+                {
                     maxLength = currentLength;
                     maxSum = currentSum;
                 }
@@ -64,7 +73,8 @@ int main() {
             }
             tmpLength = 1;
         }
-        else {
+        else
+        {
             currentLength++;
             tmpLength++;
             currentSum += currentNumber;
@@ -72,7 +82,8 @@ int main() {
         previousNumber = currentNumber;
         currentNumber = 0;
     }
-    if (currentLength > maxLength) {
+    if (currentLength > maxLength)
+    {
         maxLength = currentLength;
         maxSum = currentSum;
     }
