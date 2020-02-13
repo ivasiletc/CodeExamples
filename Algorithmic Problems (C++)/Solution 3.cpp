@@ -30,14 +30,17 @@ int main() {
 
     int** matrix = new int* [row + 1];
     for (int i = 0; i < row + 1; i++)
+    {
         matrix[i] = new int[row + 1];
-
+    }
+    
     for (int i = 1; i < row + 1; ++i) 
     {
         for (int j = 1; j < row + 1; ++j) 
         {
             isNegative = false;
-            if (line[index] == 10) {
+            if (line[index] == 10) 
+            {
                 index++;
             }
             while (line[index] > 32) 
@@ -49,7 +52,9 @@ int main() {
                     tmp = (tmp << 3) + (tmp << 1) + line[index] - 48;
                 }
                 else
+                {
                     tmp = (tmp << 3) + (tmp << 1) + line[index] - 48;
+                }
                 index++;
 
             }
@@ -67,8 +72,10 @@ int main() {
 
     int** bob = new int* [subMatrix];
     for (int i = 0; i < subMatrix; i++)
+    {
         bob[i] = new int[4];
-
+    }
+    
     for (int l = 0; l < subMatrix; ++l) 
     {
         for (int i = 0; i < 4; ++i) 
@@ -86,7 +93,6 @@ int main() {
         }
     }
 
-    int abstr = 0;
     int totalSum = 0;
     int sum = 0;
     map<int, int> map;
@@ -107,8 +113,11 @@ int main() {
     for (std::map<int, int>::iterator it = map.begin(); it != map.end(); ++it) 
     {
         if (it->second == tmp2)
+        {
             result++;
-        else if (it->second > tmp2) {
+        }
+        else if (it->second > tmp2) 
+        {
             result = 1;
             tmp2 = it->second;
         }
