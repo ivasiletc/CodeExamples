@@ -11,36 +11,40 @@ int main() {
     read(0, line, 150000000);
     int index = 0;
 
-    int wiersz = 0;
-    int podm = 0;
+    int row = 0;
+    int subMatrix = 0;
 
-    while (line[index] > 32) {
-        wiersz = (wiersz << 3) + (wiersz << 1) + line[index] - 48;
+    while (line[index] > 32) 
+    {
+        row = (row << 3) + (row << 1) + line[index] - 48;
         index++;
     }
     index++;
-    while (line[index] > 32) {
-        podm = (podm << 3) + (podm << 1) + line[index] - 48;
+    while (line[index] > 32) 
+    {
+        subMatrix = (subMatrix << 3) + (subMatrix << 1) + line[index] - 48;
         index++;
     }
     index++;
-    bool neg;
+    bool isNegative;
 
-    int** tab = new int* [wiersz + 1];
-    for (int i = 0; i < wiersz + 1; i++)
-        tab[i] = new int[wiersz + 1];
+    int** matrix = new int* [row + 1];
+    for (int i = 0; i < row + 1; i++)
+        matrix[i] = new int[row + 1];
 
-    for (int i = 1; i < wiersz + 1; ++i) {
-        for (int j = 1; j < wiersz + 1; ++j) {
-            neg = false;
+    for (int i = 1; i < row + 1; ++i) 
+    {
+        for (int j = 1; j < row + 1; ++j) 
+        {
+            isNegative = false;
             if (line[index] == 10) {
                 index++;
             }
-            while (line[index] > 32) {
-
-
-                if (line[index] == '-') {
-                    neg = true;
+            while (line[index] > 32) 
+            {
+                if (line[index] == '-') 
+                {
+                    isNegative = true;
                     index++;
                     tmp = (tmp << 3) + (tmp << 1) + line[index] - 48;
                 }
@@ -50,24 +54,28 @@ int main() {
 
             }
 
-            if (neg == true) {
+            if (isNegative == true) 
+            {
                 tmp = ~tmp + 1;
             }
             index++;
 
-            tab[i][j] = tmp + tab[i - 1][j] + tab[i][j - 1] - tab[i - 1][j - 1];
+            matrix[i][j] = tmp + matrix[i - 1][j] + matrix[i][j - 1] - matrix[i - 1][j - 1];
             tmp = 0;
         }
     }
 
-    int** bob = new int* [podm];
-    for (int i = 0; i < podm; i++)
+    int** bob = new int* [subMatrix];
+    for (int i = 0; i < subMatrix; i++)
         bob[i] = new int[4];
 
-    for (int l = 0; l < podm; ++l) {
-        for (int i = 0; i < 4; ++i) {
+    for (int l = 0; l < subMatrix; ++l) 
+    {
+        for (int i = 0; i < 4; ++i) 
+        {
 
-            while (line[index] > 32) {
+            while (line[index] > 32) 
+            {
 
                 tmp = (tmp << 3) + (tmp << 1) + line[index] - 48;
                 index++;
@@ -82,12 +90,13 @@ int main() {
     int totalSum = 0;
     int sum = 0;
     map<int, int> map;
-    for (int i = 0; i < podm; i++) {
+    for (int i = 0; i < subMatrix; i++) 
+    {
         sum =
-            tab[bob[i][2] + 1][bob[i][3] + 1] +
-            tab[bob[i][0]][bob[i][1]] -
-            tab[bob[i][0]][bob[i][3] + 1] -
-            tab[bob[i][2] + 1][bob[i][1]];
+            matrix[bob[i][2] + 1][bob[i][3] + 1] +
+            matrix[bob[i][0]][bob[i][1]]         -
+            matrix[bob[i][0]][bob[i][3] + 1]     -
+            matrix[bob[i][2] + 1][bob[i][1]];
         totalSum += sum;
         map[sum]++;
     }
@@ -95,7 +104,8 @@ int main() {
     int result = 0;
     int tmp2 = 0;
 
-    for (std::map<int, int>::iterator it = map.begin(); it != map.end(); ++it) {
+    for (std::map<int, int>::iterator it = map.begin(); it != map.end(); ++it) 
+    {
         if (it->second == tmp2)
             result++;
         else if (it->second > tmp2) {
@@ -103,6 +113,6 @@ int main() {
             tmp2 = it->second;
         }
     }
-    printf("%i %i %i", map.size(), result, totalSum / podm);
+    printf("%i %i %i", map.size(), result, totalSum / subMatrix);
 
 }
