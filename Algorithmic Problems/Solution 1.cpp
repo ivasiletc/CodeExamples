@@ -4,76 +4,75 @@
 using namespace std;
 
 int main() {
-    long long pred = 0;
-    int teku = 0, dlS = 1, dlTeku = 1, dlMax = 1;
-    long long sumTeku = 0, sumMax = 0;
-    bool czyRos = true;
+    int previousNumber = 0, currentNumber = 0;
+    int tmpLength = 1, currentLength = 1, maxLength = 1;
+    long long currentSum = 0, maxSum = 0;
+    bool isIncreased = true;
 
-    char* line = new char[100000000];
-    // fgets(line, 100000000, stdin);
-    read(0, line, 100000000);
+    char* input = new char[100000000];
+    read(0, input, 100000000);
     int i = 0;
 
-    while (line[i] >= 48 && line[i] <= 57) {
-        teku = (teku << 3) + (teku << 1) + line[i] - 48;
+    while (input[i] >= 48 && input[i] <= 57) {
+        currentNumber = (currentNumber << 3) + (currentNumber << 1) + input[i] - 48;
         i++;
     }
     i++;
-    sumTeku += teku;
-    pred = teku;
-    teku = 0;
+    currentSum += currentNumber;
+    previousNumber = currentNumber;
+    currentNumber = 0;
 
-    while (line[i] != '\0') {
-        while (line[i] >= 48 && line[i] <= 57) {
-            teku = (teku << 3) + (teku << 1) + line[i] - 48;
+    while (input[i] != '\0') {
+        while (input[i] >= 48 && input[i] <= 57) {
+            currentNumber = (currentNumber << 3) + (currentNumber << 1) + input[i] - 48;
             i++;
         }
         i++;
 
         //-------------Алгоритм---------------
-        if (teku > pred) {
-            if (czyRos) {
-                dlTeku++;
-                sumTeku += teku;
+        if (currentNumber > previousNumber) {
+            if (isIncreased) {
+                currentLength++;
+                currentSum += currentNumber;
             }
             else {
-                czyRos = true;
-                if (dlTeku > dlMax) {
-                    dlMax = dlTeku;
-                    sumMax = sumTeku;
+                isIncreased = true;
+                if (currentLength > maxLength) {
+                    maxLength = currentLength;
+                    maxSum = currentSum;
                 }
-                dlTeku = 1 + dlS;
-                sumTeku = pred * dlS + teku;
+                currentLength = 1 + tmpLength;
+                currentSum = previousNumber * tmpLength + currentNumber;
             }
-            dlS = 1;
+            tmpLength = 1;
         }
-        else if (teku < pred) {
-            if (!czyRos) {
-                dlTeku++;
-                sumTeku += teku;
+        else if (currentNumber < previousNumber) {
+            if (!isIncreased) {
+                currentLength++;
+                currentSum += currentNumber;
             }
             else {
-                czyRos = false;
-                if (dlTeku > dlMax) {
-                    dlMax = dlTeku;
-                    sumMax = sumTeku;
+                isIncreased = false;
+                if (currentLength > maxLength) {
+                    maxLength = currentLength;
+                    maxSum = currentSum;
                 }
-                dlTeku = 1 + dlS;
-                sumTeku = pred * dlS + teku;
+                currentLength = 1 + tmpLength;
+                currentSum = previousNumber * tmpLength + currentNumber;
             }
-            dlS = 1;
+            tmpLength = 1;
         }
         else {
-            dlTeku++;
-            dlS++;
-            sumTeku += teku;
+            currentLength++;
+            tmpLength++;
+            currentSum += currentNumber;
         }
-        pred = teku;
-        teku = 0;
+        previousNumber = currentNumber;
+        currentNumber = 0;
     }
-    if (dlTeku > dlMax) {
-        dlMax = dlTeku;
-        sumMax = sumTeku;
+    if (currentLength > maxLength) {
+        maxLength = currentLength;
+        maxSum = currentSum;
     }
-    printf("%i %lli", dlMax, sumMax);
+    printf("%i %lli", maxLength, maxSum);
 }
