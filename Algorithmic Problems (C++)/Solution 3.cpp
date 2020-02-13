@@ -70,6 +70,7 @@ int main() {
         }
     }
 
+    //Helper matrix to save sum of values, to increase the speed on final part of algorhytm
     int** bob = new int* [subMatrix];
     for (int i = 0; i < subMatrix; i++)
     {
@@ -108,18 +109,18 @@ int main() {
     }
 
     int result = 0;
-    int tmp2 = 0;
+    tmp = 0;
 
     for (std::map<int, int>::iterator it = map.begin(); it != map.end(); ++it) 
     {
-        if (it->second == tmp2)
+        if (it->second == tmp)
         {
             result++;
         }
-        else if (it->second > tmp2) 
+        else if (it->second > tmp) 
         {
             result = 1;
-            tmp2 = it->second;
+            tmp = it->second;
         }
     }
     printf("%i %i %i", map.size(), result, totalSum / subMatrix);
