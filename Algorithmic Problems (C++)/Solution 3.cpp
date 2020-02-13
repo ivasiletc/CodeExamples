@@ -11,8 +11,6 @@ int main() {
     read(0, line, 150000000);
     int index = 0;
 
-    //    uint_fast32_t wiersz = 0;
-    //    uint_fast32_t podm = 0;
     int wiersz = 0;
     int podm = 0;
 
@@ -27,7 +25,7 @@ int main() {
     }
     index++;
     bool neg;
-    //----------------------------------------------------------------------------------
+
     int** tab = new int* [wiersz + 1];
     for (int i = 0; i < wiersz + 1; i++)
         tab[i] = new int[wiersz + 1];
@@ -57,18 +55,11 @@ int main() {
             }
             index++;
 
-            // cout << tmp << " ";
             tab[i][j] = tmp + tab[i - 1][j] + tab[i][j - 1] - tab[i - 1][j - 1];
             tmp = 0;
-            // cout << "Idex: " << index  << " line[index] = " << line[index]<< endl;
         }
     }
-    //    if(line[4095] == 10 ) {
-    //        cout <<"PNH " << endl;
-    //        cout << line[4095] << endl;
-    //    }
-    //2 1 1 -2 3 -4 0 0 1 1
-    ////----------------------------------------------------------------------------------
+
     int** bob = new int* [podm];
     for (int i = 0; i < podm; i++)
         bob[i] = new int[4];
@@ -83,18 +74,15 @@ int main() {
             }
             index++;
             bob[l][i] = tmp;
-            //  cout << bob[l][i];
             tmp = 0;
         }
     }
-    ////----------------------------------------------------------------------------------
+
     int abstr = 0;
     int totalSum = 0;
     int sum = 0;
     map<int, int> map;
     for (int i = 0; i < podm; i++) {
-        //cout <<tab[bob[i][2]+1][bob[i][3]+1] << " " <<tab[bob[i][0]][bob[i][1]] << " "
-        //     << tab[bob[i][0]][bob[i][3]+1]<< " " << tab[bob[i][2]+1][bob[i][1]]<< endl;
         sum =
             tab[bob[i][2] + 1][bob[i][3] + 1] +
             tab[bob[i][0]][bob[i][1]] -
