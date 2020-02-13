@@ -4,89 +4,84 @@
 
 using namespace std;
 
-
-long long miasta = 0, paliwo = 0, maxpal = 0, tmp;
-
-struct Miasto {
-    int stpal, droga;
+struct City 
+{
+    int gasStation
+    int distance;
 };
 
 int main() {
-    //---------------------Cчитывание--------------------
     char* line = new char[100000000];
-    // fgets(line, 100000000, stdin);
     read(0, line, 100000000);
 
+    long long citiesNumber = 0, fuel = 0, maxpal = 0, tmp;
     int iter = 0;
 
-    while (*line >= 48) {
-        miasta = (miasta << 3) + (miasta << 1) + *line - '0';
+    while (*line >= 48) 
+    {
+        citiesNumber = (citiesNumber << 3) + (citiesNumber << 1) + *line - '0';
         line++;
     }
     line++;
 
-    //---------------------Массив------------------------
-    Miasto m[miasta];
-    //---------------------Инициализация массива---------
+    City cities[citiesNumber];
 
-    //---------------------Алгоритм-----------------------
     int index;
-
     int i = 0;
-    //        for(; i < miasta; i++){
-    //        paliwo = paliwo + m[i].stpal - m[i].droga;
-    //        if (paliwo < maxpal) {
-    //            maxpal = paliwo;
-    //            index = i + 1;
-    //        }
-    //        if (index >= miasta) {
-    //            index = 0;
-    //        }
 
-    for (; i < miasta; ++i) {
-        while (*line >= 48) {
-            m[i].stpal = (m[i].stpal << 3) + (m[i].stpal << 1) + *line - '0';
+    for (; i < citiesNumber; ++i) 
+    {
+        while (*line >= 48) 
+        {
+            cities[i].gasStation = (cities[i].gasStation << 3) + (cities[i].gasStation << 1) + *line - '0';
             line++;
         }
         line++;
-        while (*line >= 48) {
-            m[i].droga = (m[i].droga << 3) + (m[i].droga << 1) + *line - '0';
+        
+        while (*line >= 48) 
+        {
+            cities[i].distance = (cities[i].distance << 3) + (cities[i].distance << 1) + *line - '0';
             line++;
         }
         line++;
 
-        paliwo = paliwo + m[i].stpal - m[i].droga;
-        if (paliwo < maxpal) {
-            maxpal = paliwo;
+        fuel = fuel + cities[i].gasStation - cities[i].distance;
+        if (fuel < maxpal) 
+        {
+            maxpal = fuel;
             index = i + 1;
         }
     }
 
-    if (index >= miasta) {
+    if (index >= citiesNumber) 
+    {
         index = 0;
     }
 
     maxpal = 0;
-    paliwo = 0;
+    fuel = 0;
     i = index;
-    while (true) {
+    
+    while (true) 
+    {
+        fuel = fuel + cities[i].gasStation - cities[i].distance;
 
-        paliwo = paliwo + m[i].stpal - m[i].droga;
-
-        if (paliwo > maxpal) {
-            maxpal = paliwo;
+        if (fuel > maxpal) 
+        {
+            maxpal = fuel;
         }
         i++;
-        if (i >= miasta) {
+        
+        if (i >= citiesNumber) 
+        {
             i = 0;
         }
-        if (i == index) {
+        
+        if (i == index) 
+        {
             break;
         }
     }
 
-    //    }
-
     printf("%i %lli", index, maxpal);
-
 }
