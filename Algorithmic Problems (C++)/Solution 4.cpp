@@ -36,7 +36,8 @@ int getNum()
     }
 }
 
-struct Place {
+struct Place 
+{
     int owner = -1;
     vector <int> neighbours;
 };
@@ -75,12 +76,11 @@ int main() {
     bool isOk = false;
     map<int, map<int, int> > mapA;
     map<int, map<int, int> > mapB;
-    int maxInd;
-    int minInd;
-    int maxVal;
-    bool statA;
-    bool statB;
-    while (isOk == false) 
+    
+    int minIndex, maxIndex, maxValue;
+    bool statA, statB;
+    
+    while (!isOk) 
     {
         mapA.clear();
         mapB.clear();
@@ -91,7 +91,6 @@ int main() {
             if (cityInd[i] == -1) 
             {
                 isOk = false;
-                
                 if (placesA[i].neighbours.size() == 0) 
                 {
                     cityInd[i] = i;
@@ -123,25 +122,25 @@ int main() {
         //Option A
         for (std::map<int, std::map<int, int> >::iterator it = mapA.begin(); it != mapA.end(); it++) 
         {
-            maxVal = 9999999;
-            maxInd = -1;
+            maxValue = 9999999;
+            maxIndex = -1;
             for (std::map<int, int>::iterator it1 = it->second.begin(); it1 != it->second.end(); it1++) 
             {
 
-                if (it1->second < maxVal) 
+                if (it1->second < maxValue) 
                 {
-                    maxVal = it1->second;
-                    maxInd = it1->first;
+                    maxValue = it1->second;
+                    maxIndex = it1->first;
                     placesA[it->first].owner = it1->first;
                     cityInd[it->first] = it->first;
                 }
-                else if (it1->second == maxVal) 
+                else if (it1->second == maxValue) 
                 {
-                    if (it1->first > maxInd) 
+                    if (it1->first > maxIndex) 
                     {
                         placesA[it->first].owner = it1->first;
                         cityInd[it->first] = it->first;
-                        maxInd = it1->first;
+                        maxIndex = it1->first;
                     }
                 }
             }
@@ -150,24 +149,24 @@ int main() {
         //Option B
         for (std::map<int, std::map<int, int> >::iterator it = mapB.begin(); it != mapB.end(); it++) 
         {
-            maxVal = 1;
-            minInd = 9999999;
+            maxValue = 1;
+            minIndex = 9999999;
             for (std::map<int, int>::iterator it1 = it->second.begin(); it1 != it->second.end(); it1++) 
             {
-                if (it1->second > maxVal) 
+                if (it1->second > maxValue) 
                 {
-                    maxVal = it1->second;
-                    minInd = it1->first;
+                    maxValue = it1->second;
+                    minIndex = it1->first;
                     placesB[it->first].owner = it1->first;
                     cityInd[it->first] = it->first;
                 }
-                else if (it1->second == maxVal) 
+                else if (it1->second == maxValue) 
                 {
-                    if (it1->first < minInd) 
+                    if (it1->first < minIndex) 
                     {
                         placesB[it->first].owner = it1->first;
                         cityInd[it->first] = it->first;
-                        minInd = it1->first;
+                        minIndex = it1->first;
                     }
                 }
             }
