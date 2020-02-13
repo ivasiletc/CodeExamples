@@ -1,18 +1,17 @@
 #include <stdio.h>
 #include <string.h>
 
-struct Uzel;
-
-Uzel* aktualnyUzel;
+struct Node;
+Node* currentNode;
 
 char result[65];
-char tmpSlowo[65];
+char tmpWord[65];
 //Tree
-struct Uzel {
+struct Node {
     char value;
-    Uzel* right;
-    Uzel* left;
-    Uzel* parent;
+    Node* right;
+    Node* left;
+    Node* parent;
 
     //Algorhytm
     void search() {
@@ -23,17 +22,17 @@ struct Uzel {
             this->right->search();
         }
         else if (!this->left) {
-            aktualnyUzel = this;
+            currentNode = this;
             int i = 0;
-            while (aktualnyUzel->parent) {
-                tmpSlowo[i] = aktualnyUzel->value;
-                aktualnyUzel = aktualnyUzel->parent;
+            while (currentNode->parent) {
+                tmpWord[i] = currentNode->value;
+                currentNode = currentNode->parent;
                 ++i;
             }
-            tmpSlowo[i] = aktualnyUzel->value;
-            tmpSlowo[i + 1] = 0;
-            if (strcmp(result, tmpSlowo) < 0) {
-                strncpy(result, tmpSlowo, 65);
+            tmpWord[i] = currentNode->value;
+            tmpWord[i + 1] = 0;
+            if (strcmp(result, tmpWord) < 0) {
+                strncpy(result, tmpWord, 65);
             }
         }
     }
@@ -43,32 +42,32 @@ int main() {
     char tmpChar;
     char lastChar = getchar_unlocked();
 
-    Uzel* start = new Uzel();
-    aktualnyUzel = start;
+    Node* start = new Node();
+    currentNode = start;
 
     while (tmpChar != EOF) {
         tmpChar = getchar_unlocked();
         if (tmpChar >= 'a' && tmpChar <= 'z') {
-            aktualnyUzel->value = lastChar;
-            aktualnyUzel = start;
+            currentNode->value = lastChar;
+            currentNode = start;
             lastChar = tmpChar;
         }
         else if (tmpChar == 'R') {
-            if (!aktualnyUzel->right) {
-                aktualnyUzel->right = new Uzel();
-                aktualnyUzel->right->parent = aktualnyUzel;
+            if (!currentNode->right) {
+                currentNode->right = new Node();
+                currentNode->right->parent = currentNode;
             }
-            aktualnyUzel = aktualnyUzel->right;
+            currentNode = currentNode->right;
         }
         else if (tmpChar == 'L') {
-            if (!aktualnyUzel->left) {
-                aktualnyUzel->left = new Uzel();
-                aktualnyUzel->left->parent = aktualnyUzel;
+            if (!currentNode->left) {
+                currentNode->left = new Node();
+                currentNode->left->parent = currentNode;
             }
-            aktualnyUzel = aktualnyUzel->left;
+            currentNode = currentNode->left;
         }
     }
-    aktualnyUzel->value = lastChar;
+    currentNode->value = lastChar;
     start->search();
 
     printf("%s", result);
