@@ -24,6 +24,7 @@ private:
     std::stack<StateRef> _states;
     StateRef _newState;
 
+    bool _isReplacing;
     bool _isRemoving;
     bool _isAdding;
 };
