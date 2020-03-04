@@ -1,6 +1,6 @@
 #include "StateMachine.hpp"
 
-void StateMachine::AddState(StateRef newState, bool isReplacing = true)
+void StateMachine::AddState(StateRef newState, bool isReplacing)
 {
     this->_isAdding = true;
     this->_isReplacing = isReplacing;
