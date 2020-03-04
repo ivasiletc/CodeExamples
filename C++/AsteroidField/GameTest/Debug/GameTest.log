@@ -1,2 +1,38 @@
-﻿  StateMachine.cpp
+﻿  InputManager.cpp
+E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\InputManager.cpp(7,140): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\InputManager.cpp(7,108): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\InputManager.cpp(7,80): warning C4244: 'argument': conversion from 'const T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\InputManager.cpp(7,56): warning C4244: 'argument': conversion from 'const T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
   GameTest.vcxproj -> E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\Debug\GameTest.exe
