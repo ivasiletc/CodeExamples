@@ -2,25 +2,12 @@
 #include <iostream>
 
 #include "logger.h"
+#include "Game.hpp"
+#include "DEFINITIONS.hpp"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(500, 700), "Asteroid Field game by Iaroslav Vasiletc");
-
-    while (window.isOpen())
-    {
-        // handle events
-
-        //update game logic
-
-        //draw
-        window.clear();
-
-        //draw SFML objects
-
-        window.display();
-        log << "Hello world " << 9;
-    }
+    Game(SCREEN_WIDTH, SCREEN_HEIGHT, "Asteroid Game by Iaroslav Vasiletc");
 
     return EXIT_SUCCESS;
 }
