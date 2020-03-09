@@ -2,6 +2,8 @@
 
 void StateMachine::AddState(StateRef newState, bool isReplacing)
 {
+    log << "Add state function called";
+
     this->_isAdding = true;
     this->_isReplacing = isReplacing;
 
@@ -34,6 +36,7 @@ void StateMachine::ProcessStateChanges()
             if (this->_isReplacing)
             {
                 this->_states.pop();
+                log << "State was added to the stack";
             }
             else
             {
@@ -48,5 +51,12 @@ void StateMachine::ProcessStateChanges()
 
 StateRef& StateMachine::GetActiveState()
 {
-    return this->_states.top();
+    if (!this->_states.empty())
+    {
+        return this->_states.top();
+    }
+    else
+    {
+        log << "Stack is empty";
+    }
 }
