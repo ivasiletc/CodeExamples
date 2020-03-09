@@ -1,5 +1,7 @@
 #pragma once
 
+#include "logger.h"
+
 class State
 {
 public:
