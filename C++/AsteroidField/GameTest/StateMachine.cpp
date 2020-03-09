@@ -57,6 +57,7 @@ StateRef& StateMachine::GetActiveState()
     }
     else
     {
+        return this->_states.top();
         log << "Stack is empty";
     }
 }
