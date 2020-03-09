@@ -30,6 +30,12 @@
     <ClCompile Include="InputManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SplashState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="logger.h">
@@ -47,5 +53,43 @@
     <ClInclude Include="InputManager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Game.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DEFINITIONS.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SplashState.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resourses\asteroid1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resourses\asteroid2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resourses\asteroid3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resourses\asteroid-original.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resourses\background1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resourses\background2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resourses\background3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resourses\spaceship.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resourses\asteroid1 - Copy.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

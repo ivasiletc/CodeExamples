@@ -7,8 +7,8 @@
 class AssetManager
 {
 public:
-    AssetManager();
-    ~AssetManager();
+    AssetManager() {};
+    ~AssetManager() {};
 
     void LoadTexture(std::string name, std::string fileName);
     sf::Texture& GetTexture(std::string name);
