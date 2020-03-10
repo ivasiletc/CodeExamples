@@ -1,7 +1,3 @@
-#include <SFML/graphics.hpp>
-#include <iostream>
-
-#include "logger.h"
 #include "Game.hpp"
 #include "DEFINITIONS.hpp"
 
