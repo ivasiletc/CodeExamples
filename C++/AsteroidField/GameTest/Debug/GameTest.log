@@ -1,3 +1,8 @@
-﻿  StateMachine.cpp
-E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\StateMachine.cpp(62): warning C4715: 'StateMachine::GetActiveState': not all control paths return a value
+﻿  Game.cpp
+E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\Game.cpp(9,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\Game.cpp(19,31): warning C4101: 'interpolation': unreferenced local variable
+  main.cpp
+  MainMenuState.cpp
+  SplashState.cpp
+  Generating Code...
   GameTest.vcxproj -> E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\Debug\GameTest.exe
