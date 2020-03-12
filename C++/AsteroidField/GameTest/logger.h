@@ -7,12 +7,21 @@
 #include <sstream>
 #include <string>
 
-#define log logger(__FUNCTION__, __LINE__)
+#define log logger(__FUNCTION__, __LINE__, DEBUG)
+#define log_warn logger(__FUNCTION__, __LINE__, WARNING)
+#define log_err logger(__FUNCTION__, __LINE__, ERROR)
+
+enum log_type
+{
+    DEBUG,
+    WARNING,
+    ERROR
+};
 
 class logger
 {
 public:
-    logger(std::string _function, int _line);
+    logger(std::string _function, int _line, log_type _type);
     ~logger();
 
     template<typename T>

@@ -9,14 +9,14 @@
 
 SplashState::SplashState(GameDataRef data) : _data(data)
 {
-
+    log << "class constructor was called";
 }
 
 void SplashState::Init()
 {
-    _data->assets.LoadTexture("Splash State Background", SPLASH_SCENE_BACKGROUND_FILEPATH);
+    this->_data->assets.LoadTexture("Splash State Background", SPLASH_SCENE_BACKGROUND_FILEPATH);
 
-    _background.setTexture(this->_data->assets.GetTexture("Splash State Background"));
+    this->_background.setTexture(this->_data->assets.GetTexture("Splash State Background"));
 }
 
 void SplashState::HandleInput()
@@ -48,4 +48,9 @@ void SplashState::Draw(float dt)
     _data->window.draw(_background);
 
     _data->window.display();
+}
+
+SplashState::~SplashState()
+{
+    log << "class destructor was called";
 }

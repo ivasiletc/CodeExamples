@@ -5,9 +5,23 @@
 #pragma once
 #include "logger.h"
 
-logger::logger(std::string _function, int _line)
+logger::logger(std::string _function, int _line, log_type _type)
 {
-    ss << _function << "() " << "line " << _line << ": ";
+    switch(_type)
+    {
+    case DEBUG:
+        ss << _function << "() " << "line " << _line << ": ";
+        break;
+
+    case ERROR:
+        ss << "ERROR " << _function << "() " << "line " << _line << ": ";
+        break;
+
+    case WARNING:
+        ss << "WARNING " <<  _function << "() " << "line " << _line << ": ";
+        break;
+    }
+
 }
 
 logger::~logger()
