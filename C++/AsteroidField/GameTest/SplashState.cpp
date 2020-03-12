@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "SplashState.hpp"
+#include "MainMenuState.hpp"
 #include "DEFINITIONS.hpp"
 
 SplashState::SplashState(GameDataRef data) : _data(data)
@@ -36,6 +37,7 @@ void SplashState::Update(float dt)
     if (_clock.getElapsedTime().asSeconds() > SPLASH_STATE_SHOW_TIME)
     {
         log << "Go to main menu";
+        this->_data->machine.AddState(StateRef(new MainMenuState(_data)), true);
     }
 }
 
