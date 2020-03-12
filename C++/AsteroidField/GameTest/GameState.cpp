@@ -36,7 +36,8 @@ void GameState::HandleInput()
 
 	while (this->_data->window.pollEvent(event))
 	{
-		log << "";
+		log << "Event: " << event.type;
+
 		if (sf::Event::Closed == event.type)
 		{
 			log_warn << "Close event recieved";
@@ -112,8 +113,9 @@ void GameState::Update(float dt)
 
 void GameState::Draw(float dt)
 {
-	this->_data->window.clear( sf::Color::Red );
+	log << "function was called";
 
+	this->_data->window.clear( sf::Color::Red );
 	this->_data->window.draw(this->_background);
 
 	asteroid->DrawAsteroids();
