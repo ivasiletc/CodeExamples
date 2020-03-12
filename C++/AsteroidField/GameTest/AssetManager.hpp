@@ -4,11 +4,13 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "logger.h"
+
 class AssetManager
 {
 public:
-    AssetManager() {};
-    ~AssetManager() {};
+    AssetManager() { log << "constructor was called"; };
+    ~AssetManager() { log << "WARN: destructor was called"; };
 
     void LoadTexture(std::string name, std::string fileName);
     sf::Texture& GetTexture(std::string name);
