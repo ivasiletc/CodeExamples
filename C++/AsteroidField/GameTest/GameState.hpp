@@ -2,9 +2,12 @@
 
 #include <SFML/Graphics.hpp>
 #include "State.hpp"
+#include "logger.h"
 #include "Game.hpp"
-#include "Land.hpp"
+#include "Space.hpp"
 #include "Collision.hpp"
+#include "SpaceShip.hpp"
+#include "Asteroid.hpp"
 
 class GameState : public State
 {
@@ -22,7 +25,10 @@ private:
 
 	sf::Sprite _background;
 
-	Land* land;
+	Space* space;
+	Asteroid* asteroid;
+	SpaceShip* ship;
+
 	Collision collision;
 
 	sf::Clock clock;
@@ -30,7 +36,6 @@ private:
 	int _gameState;
 
 	sf::RectangleShape _gameOverFlash;
-	bool _flashOn;
 
 	int _score;
 
