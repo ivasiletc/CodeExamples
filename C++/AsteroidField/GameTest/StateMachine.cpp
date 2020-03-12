@@ -2,7 +2,7 @@
 
 void StateMachine::AddState(StateRef newState, bool isReplacing)
 {
-    log << "Add state function called";
+    log << "function was called, isReplacing value: " << isReplacing;
 
     this->_isAdding = true;
     this->_isReplacing = isReplacing;
@@ -12,6 +12,7 @@ void StateMachine::AddState(StateRef newState, bool isReplacing)
 
 void StateMachine::RemoveState()
 {
+    log << "function was called";
     this->_isRemoving = true;
 }
 
@@ -57,7 +58,7 @@ StateRef& StateMachine::GetActiveState()
     }
     else
     {
-        return this->_states.top();
         log << "Stack is empty";
+        return this->_states.top(); //@TODO
     }
 }
