@@ -6,6 +6,8 @@
 
 Game::Game(int width, int height, std::string title)
 {
+    log << "class constructor was called";
+
     srand(time(NULL));
 
     _data->window.create(sf::VideoMode(width, height), title, sf::Style::Close | sf::Style::Titlebar);
@@ -16,6 +18,8 @@ Game::Game(int width, int height, std::string title)
 
 void Game::Run()
 {
+    log << "function was called";
+
     float newTime, frameTime, interpolation;
     float currentTime = this->_clock.getElapsedTime().asSeconds();
     float accumulator = 0.0f;
