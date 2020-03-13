@@ -1,32 +1,5 @@
-﻿  AssetManager.cpp
-  Asteroid.cpp
-E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\Asteroid.cpp(16,50): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
-          with
-          [
-              T=unsigned int
-          ]
-E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\Asteroid.cpp(23,21): warning C4018: '<': signed/unsigned mismatch
-  Game.cpp
-E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\Game.cpp(11,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\Game.cpp(23,31): warning C4101: 'interpolation': unreferenced local variable
-  GameState.cpp
-E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\GameState.cpp(83,21): warning C4018: '<': signed/unsigned mismatch
-E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\GameState.cpp(93,21): warning C4018: '<': signed/unsigned mismatch
-  MainMenuState.cpp
-  Space.cpp
-E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\Space.cpp(27,49): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=unsigned int
-          ]
-          and
-          [
-              T=float
-          ]
-  SpaceShip.cpp
-  SplashState.cpp
-  StateMachine.cpp
-  logger.cpp
-  main.cpp
-  Generating Code...
+﻿  Cannon.cpp
+E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\Cannon.cpp(12,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\Cannon.cpp(12,21): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\Cannon.cpp(27,20): warning C4018: '<': signed/unsigned mismatch
   GameTest.vcxproj -> E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\Debug\GameTest.exe
