@@ -20,8 +20,18 @@ void GameState::Init()
 	this->_data->assets.LoadTexture("Ship turning right", SHIP_RIGHT_FILEPATH);
 	this->_data->assets.LoadTexture("Ship main", SHIP_MAIN_FILEPATH);
 
+	this->_data->assets.LoadTexture("Bullet", BULLET_FILEPATH);
+
+	this->_data->assets.LoadTexture("Asteroid 0", ASTEROID0_FILEPATH);
+	this->_data->assets.LoadTexture("Asteroid 1", ASTEROID1_FILEPATH);
+	this->_data->assets.LoadTexture("Asteroid 2", ASTEROID2_FILEPATH);
+	this->_data->assets.LoadTexture("Asteroid 3", ASTEROID3_FILEPATH);
+
+
 	ship = new SpaceShip(_data);
 	asteroid = new Asteroid(_data);
+	space = new Space(_data);
+	cannon = new Cannon(_data);
 
 	_background.setTexture(this->_data->assets.GetTexture("Game Background"));
 
@@ -30,37 +40,31 @@ void GameState::Init()
 
 void GameState::HandleInput()
 {
-	log << "function was called";
-
 	sf::Event event;
 
 	while (this->_data->window.pollEvent(event))
 	{
-		log << "Event: " << event.type;
-
 		if (sf::Event::Closed == event.type)
 		{
 			log_warn << "Close event recieved";
 			this->_data->window.close();
 		}
 
-		if (this->_data->input.IsSpriteClicked(this->_background, sf::Mouse::Left, this->_data->window))
+		if (sf::Event::KeyPressed)
 		{
 			if (GameStates::eGameOver != _gameState)
 			{
-				log << "Left mouse clicked";
 				_gameState = GameStates::ePlaying;
+				ship->PressKey();
 			}
 		}
 	}
-	log << "end function";
 }
 
 void GameState::Update(float dt)
 {
 	if (GameStates::eGameOver != _gameState)
 	{
-		ship->Animate(dt);
 		space->MoveSpace(dt);
 	}
 
@@ -68,32 +72,30 @@ void GameState::Update(float dt)
 	{
 		asteroid->MoveAsteroids(dt);
 
-		if (clock.getElapsedTime().asSeconds() > ASTEROID_SPAWN_FREQUENCY)
+		if (asteroid_clock.getElapsedTime().asSeconds() > ASTEROID_SPAWN_FREQUENCY)
 		{
 			asteroid->RandomiseAsteroidOffset();
-
 			asteroid->SpawnAsteroid();
-
-			clock.restart();
+			asteroid_clock.restart();
 		}
+
+		if (cannon_clock.getElapsedTime().asSeconds() > CANNON_SHOOTING_FREQUENCY)
+		{
+			cannon->Shoot(ship->GetSprite().getPosition().x - 5, ship->GetSprite().getPosition().y - ship->GetSprite().getGlobalBounds().height / 2);
+			cannon_clock.restart();
+		}
+
 
 		ship->Update(dt);
+		cannon->Update(dt);
 
 		std::vector<sf::Sprite> spaceSprites = space->GetSprites();
-
-		for (int i = 0; i < spaceSprites.size(); i++)
-		{
-			if (collision.CheckSpriteCollision(ship->GetSprite(), 0.7f, spaceSprites.at(i), 1.0f))
-			{
-				_gameState = GameStates::eGameOver;
-			}
-		}
 
 		std::vector<sf::Sprite> asteroidSprites = asteroid->GetSprites();
 
 		for (int i = 0; i < asteroidSprites.size(); i++)
 		{
-			if (collision.CheckSpriteCollision(ship->GetSprite(), 0.625f, asteroidSprites.at(i), 1.0f))
+			if (collision.CheckSpriteCollision(ship->GetSprite(), 0.625f, asteroidSprites.at(i), asteroidSprites.at(i).getScale().x))
 			{
 				_gameState = GameStates::eGameOver;
 			}
@@ -101,26 +103,25 @@ void GameState::Update(float dt)
 
 		if (GameStates::ePlaying == _gameState)
 		{
-			log << "@TODO score system";
+			//@TODO score system
 		}
 	}
 
 	if (GameStates::eGameOver == _gameState)
 	{
-		log << "Game over";
+		//@TODO game over screen
 	}
 }
 
 void GameState::Draw(float dt)
 {
-	log << "function was called";
-
 	this->_data->window.clear( sf::Color::Red );
 	this->_data->window.draw(this->_background);
 
-	asteroid->DrawAsteroids();
 	space->DrawSpace();
+	asteroid->DrawAsteroids();
 	ship->Draw();
+	cannon->Draw();
 
 	this->_data->window.display();
 }

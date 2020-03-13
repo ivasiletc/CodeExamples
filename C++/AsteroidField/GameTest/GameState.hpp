@@ -8,6 +8,7 @@
 #include "Collision.hpp"
 #include "SpaceShip.hpp"
 #include "Asteroid.hpp"
+#include "Cannon.hpp"
 
 class GameState : public State
 {
@@ -28,10 +29,12 @@ private:
 	Space* space;
 	Asteroid* asteroid;
 	SpaceShip* ship;
+	Cannon* cannon;
 
 	Collision collision;
 
-	sf::Clock clock;
+	sf::Clock asteroid_clock;
+	sf::Clock cannon_clock;
 
 	int _gameState;
 
