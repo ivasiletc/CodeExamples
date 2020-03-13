@@ -22,5 +22,6 @@ private:
 	std::vector<sf::Sprite> asteroidSprites;
 
 	int _spaceWidth;
-	int _asteroidSpawnYOffset;
+	int _spaceHeight;
+	int _asteroidSpawnXOffset;
 };

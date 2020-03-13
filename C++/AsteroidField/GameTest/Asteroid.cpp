@@ -5,16 +5,28 @@
 
 Asteroid::Asteroid(GameDataRef data) : _data(data)
 {
-	_spaceWidth = this->_data->assets.GetTexture("Space").getSize().x;
-	_asteroidSpawnYOffset = 0;
+	_spaceWidth = SCREEN_WIDTH;
+	_spaceHeight = SCREEN_HEIGHT;
+
+	_asteroidSpawnXOffset = 0;
 }
 
 void Asteroid::SpawnAsteroid()
 {
-	sf::Sprite sprite(this->_data->assets.GetTexture("Scoring Asteroid"));
+	int AsteroidRandomTexture = rand() % (ASTEROID_TEXTURES_AMOUNT);
 
-	sprite.setPosition(this->_data->window.getSize().x, 0);
+	float AsteroidRandomSize = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
 
+	if (AsteroidRandomSize < 0.2f)
+	{
+		AsteroidRandomSize += 0.2f;
+	}
+
+	sf::Sprite sprite(this->_data->assets.GetTexture("Asteroid " + std::to_string(AsteroidRandomTexture)));
+
+	sprite.setScale(AsteroidRandomSize, AsteroidRandomSize);
+	sprite.setPosition(_asteroidSpawnXOffset, 0 - sprite.getGlobalBounds().height);
+	log << "Asteroid was spawned at X: " << _asteroidSpawnXOffset << " Y: " << 0 - sprite.getGlobalBounds().height;
 	asteroidSprites.push_back(sprite);
 }
 
@@ -22,16 +34,19 @@ void Asteroid::MoveAsteroids(float dt)
 {
 	for ( int i = 0; i < asteroidSprites.size(); i++)
 	{
-		if (asteroidSprites.at(i).getPosition().x < 0 - asteroidSprites.at(i).getLocalBounds().width)
+		if (asteroidSprites.at(i).getPosition().x < 0 - asteroidSprites.at(i).getLocalBounds().width			 ||
+			asteroidSprites.at(i).getPosition().x > SCREEN_WIDTH + asteroidSprites.at(i).getLocalBounds().width  ||
+			asteroidSprites.at(i).getPosition().y > SCREEN_HEIGHT + asteroidSprites.at(i).getLocalBounds().height)
 		{
 			asteroidSprites.erase( asteroidSprites.begin( ) + i );
+			log << "Asteroid was deleted";
 		}
 		else
 		{
 			sf::Vector2f position = asteroidSprites.at(i).getPosition();
 			float movement = ASTEROID_MOVEMENT_SPEED * dt;
 
-			asteroidSprites.at(i).move(-movement, 0);
+			asteroidSprites.at(i).move(0, movement);
 		}
 	}
 }
@@ -46,7 +61,7 @@ void Asteroid::DrawAsteroids()
 
 void Asteroid::RandomiseAsteroidOffset()
 {
-	_asteroidSpawnYOffset = rand() % (_spaceWidth + 1);
+	_asteroidSpawnXOffset = rand() % (_spaceWidth + 1);
 }
 
 const std::vector<sf::Sprite> &Asteroid::GetSprites() const
