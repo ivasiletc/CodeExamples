@@ -19,10 +19,8 @@ void AssetManager::LoadTexture(std::string name, std::string fileName)
 
 sf::Texture& AssetManager::GetTexture(std::string name)
 {
-    log << "Trying to get texture by name: " << name;
     if (_textures.find(name) != _textures.end())
     {
-        log << "Successfully got texture by name: " << name;
         return this->_textures.at(name);
     }
 
