@@ -15,9 +15,9 @@ public:
 
 	void Draw();
 
-	void Animate(float dt);
-
 	void Update(float dt);
+
+	void PressKey();
 
 	const sf::Sprite& GetSprite() const;
 
@@ -26,8 +26,6 @@ private:
 
 	sf::Sprite _shipSprite;
 	std::vector<sf::Texture> _animationFrames;
-
-	unsigned int _animationIterator;
 
 	sf::Clock _clock;
 

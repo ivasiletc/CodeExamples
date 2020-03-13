@@ -4,10 +4,10 @@
 Space::Space(GameDataRef data) : _data(data)
 {
 	sf::Sprite sprite(this->_data->assets.GetTexture("Space"));
-	sf::Sprite sprite2(this->_data->assets.GetTexture("Space"));
+    sf::Sprite sprite2(this->_data->assets.GetTexture("Space"));
 
 	sprite.setPosition(0, this->_data->window.getSize().y - sprite.getLocalBounds().height);
-	sprite2.setPosition(sprite.getLocalBounds().width, this->_data->window.getSize().y - sprite2.getLocalBounds().height);
+	sprite2.setPosition(0, sprite2.getLocalBounds().height);
 
 	_spaceSprites.push_back(sprite);
 	_spaceSprites.push_back(sprite2);
@@ -18,13 +18,13 @@ void Space::MoveSpace(float dt)
 	for (unsigned short int i = 0; i < _spaceSprites.size(); i++)
 	{
 		sf::Vector2f position = _spaceSprites.at(i).getPosition();
-		float movement = SPACE_MOVEMENT_SPEED * dt;
+		float movement = SPACESHIP_FORWARD_MOVEMENT_SPEED * dt;
 
-		_spaceSprites.at(i).move(-movement, 0.0f);
+		_spaceSprites.at(i).move(0.0f, movement);
 
-		if (_spaceSprites.at(i).getPosition().x < 0 - _spaceSprites.at(i).getLocalBounds().width)
+		if (_spaceSprites.at(i).getPosition().y > 0)
 		{
-			sf::Vector2f position(_data->window.getSize().x, _spaceSprites.at(i).getPosition().y);
+			sf::Vector2f position(0, this->_data->window.getSize().y - _spaceSprites.at(i).getLocalBounds().height);
 
 			_spaceSprites.at(i).setPosition(position);
 		}
