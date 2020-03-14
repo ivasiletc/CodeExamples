@@ -14,6 +14,7 @@ public:
 	void MoveAsteroids(float dt);
 	void DrawAsteroids();
 	void RandomiseAsteroidOffset();
+	void DeleteAsteroid(int index);
 
 	const std::vector<sf::Sprite>& GetSprites() const;
 

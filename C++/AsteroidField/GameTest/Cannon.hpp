@@ -15,9 +15,10 @@ public:
 
 	void Update(float dt);
 
-	const std::vector<sf::Sprite>& GetSprite() const;
+	const std::vector<sf::Sprite>& GetSprites() const;
 
 	void Shoot(int x, int y);
+	void DeleteBullet(int index);
 
 private:
 	GameDataRef _data;

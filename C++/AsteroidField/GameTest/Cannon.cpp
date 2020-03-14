@@ -40,7 +40,12 @@ void Cannon::Update(float dt)
 	}
 }
 
-const std::vector<sf::Sprite>& Cannon::GetSprite() const
+void Cannon::DeleteBullet(int index)
+{
+	bulletSprites.erase(bulletSprites.begin() + index);
+}
+
+const std::vector<sf::Sprite>& Cannon::GetSprites() const
 {
     return bulletSprites;
 }

@@ -64,6 +64,11 @@ void Asteroid::RandomiseAsteroidOffset()
 	_asteroidSpawnXOffset = rand() % (_spaceWidth + 1);
 }
 
+void Asteroid::DeleteAsteroid(int index)
+{
+	asteroidSprites.erase(asteroidSprites.begin() + index);
+}
+
 const std::vector<sf::Sprite> &Asteroid::GetSprites() const
 {
 	return asteroidSprites;
