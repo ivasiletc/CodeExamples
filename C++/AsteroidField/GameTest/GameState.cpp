@@ -89,15 +89,24 @@ void GameState::Update(float dt)
 		ship->Update(dt);
 		cannon->Update(dt);
 
-		std::vector<sf::Sprite> spaceSprites = space->GetSprites();
-
 		std::vector<sf::Sprite> asteroidSprites = asteroid->GetSprites();
+		std::vector<sf::Sprite> bulletSprites = cannon->GetSprites();
 
 		for (int i = 0; i < asteroidSprites.size(); i++)
 		{
 			if (collision.CheckSpriteCollision(ship->GetSprite(), 0.625f, asteroidSprites.at(i), asteroidSprites.at(i).getScale().x))
 			{
 				_gameState = GameStates::eGameOver;
+			}
+
+			for (int j = 0; j < bulletSprites.size(); j++)
+			{
+				if (collision.CheckSpriteCollision(bulletSprites.at(j), 1, asteroidSprites.at(i), asteroidSprites.at(i).getScale().x))
+				{
+					asteroid->DeleteAsteroid(i);
+					cannon->DeleteBullet(j);
+					log << "Asteroid sprite deleted";
+				}
 			}
 		}
 
