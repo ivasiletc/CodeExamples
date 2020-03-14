@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "GameState.hpp"
+#include "GameOverState.hpp"
 #include "DEFINITIONS.hpp"
 
 GameState::GameState(GameDataRef data) : _data(data)
@@ -118,7 +119,7 @@ void GameState::Update(float dt)
 
 	if (GameStates::eGameOver == _gameState)
 	{
-		//@TODO game over screen
+		this->_data->machine.AddState(StateRef(new GameOverState(_data, _score)), true);
 	}
 }
 
