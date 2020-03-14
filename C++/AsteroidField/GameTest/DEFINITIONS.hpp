@@ -11,8 +11,8 @@
 #define SPACESHIP_MASS 1
 
 /* Spawn an object (asteroid/bullet) every $value seconds. Less $value ->  frequency increases*/
-#define CANNON_SHOOTING_FREQUENCY 1.0f
-#define ASTEROID_SPAWN_FREQUENCY 1.5f
+#define CANNON_SHOOTING_FREQUENCY 0.4f
+#define ASTEROID_SPAWN_FREQUENCY 0.7f
 
 #define CANNON_BULLETS_SPEED 10
 
@@ -27,6 +27,7 @@
 #define SPLASH_SCENE_BACKGROUND_FILEPATH "Resources/SplashState.png"
 #define MAIN_MENU_BACKGROUND_FILEPATH "Resources/background1.png"
 #define GAME_BACKGROUND_FILEPATH "Resources/background1.png"
+#define GAME_OVER_BACKGROUND_FILEPATH "Resources/background1.png"
 
 #define SPACE_FILEPATH "Resources/background1.png"
 
