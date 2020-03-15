@@ -21,4 +21,10 @@ private:
     sf::Sprite _background;
     sf::Sprite _retryButton;
 
+    sf::Text _scoreText;
+    sf::Text _highScoreText;
+
+    int _score;
+    int _highScore;
+
 };
