@@ -15,6 +15,24 @@ SpaceShip::SpaceShip(GameDataRef data) : _data(data)
 	sf::Vector2f origin = sf::Vector2f(_shipSprite.getGlobalBounds().width / 2, _shipSprite.getGlobalBounds().height / 2);
 
 	_shipSprite.setOrigin(origin);
+
+	_spaceShipMass = SPACESHIP_MASS;
+
+	if (_spaceShipMass > 0)
+	{
+		_spaceShipAcceleration = SPACESHIP_MANOEUVERING_ENGINES_THRUST / _spaceShipMass;
+	}
+	else if (_spaceShipMass == 0)
+	{
+		log << "Are you sure that spaceship should have 0kg mass?";
+		_spaceShipAcceleration = SPACESHIP_MANOEUVERING_ENGINES_THRUST;
+	}
+	else
+	{
+		log << "Are you sure that spaceship should have negative mass?";
+		_spaceShipAcceleration = 0.001f;
+	}
+
 }
 
 SpaceShip::~SpaceShip()
@@ -29,12 +47,13 @@ void SpaceShip::Draw()
 
 void SpaceShip::Update(float dt)
 {
+
 	if (SHIP_STATE_TURNING_LEFT == _shipState)
 	{
 		_shipSprite.setTexture(_data->assets.GetTexture("Ship turning left"));
 		if (_shipSprite.getPosition().x > 0 + _shipSprite.getGlobalBounds().width / 2)
 		{
-			_shipSprite.move(-5, 0);
+			_shipSprite.move(-_spaceShipAcceleration, 0);
 		}
 	}
 	else if (SHIP_STATE_TURNING_RIGHT == _shipState)
@@ -42,7 +61,7 @@ void SpaceShip::Update(float dt)
 		_shipSprite.setTexture(_data->assets.GetTexture("Ship turning right"));
 		if (_shipSprite.getPosition().x < SCREEN_WIDTH - _shipSprite.getGlobalBounds().width/2)
 		{
-			_shipSprite.move(5, 0);
+			_shipSprite.move(_spaceShipAcceleration, 0);
 		}
 	}
 	else if (SHIP_STATE_MAIN == _shipState)
@@ -56,19 +75,11 @@ void SpaceShip::PressKey()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		if (_shipSprite.getPosition().x > 0 + _shipSprite.getGlobalBounds().width / 2)
-		{
-			_shipSprite.move(-1.f, 0.f);
-		}
 		_shipState = SHIP_STATE_TURNING_LEFT;
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		if (_shipSprite.getPosition().x < SCREEN_WIDTH - _shipSprite.getGlobalBounds().width / 2)
-		{
-			_shipSprite.move(1.f, 0.f);
-		}
 		_shipState = SHIP_STATE_TURNING_RIGHT;
 	}
 

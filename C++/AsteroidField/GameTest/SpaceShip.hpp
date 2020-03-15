@@ -32,5 +32,6 @@ private:
 	sf::Clock _movementClock;
 
 	int _shipState;
-
+	float _spaceShipAcceleration;
+	float _spaceShipMass;
 };
