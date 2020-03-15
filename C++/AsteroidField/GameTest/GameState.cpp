@@ -124,16 +124,22 @@ void GameState::Update(float dt)
 			{
 				_gameState = GameStates::eGameOver;
 			}
+		}
 
+
+		for (int i = 0; i < asteroidSprites.size(); i++)
+		{
 			for (int j = 0; j < bulletSprites.size(); j++)
 			{
 				if (collision.CheckSpriteCollision(bulletSprites.at(j), 1, asteroidSprites.at(i).asteroidSprite, asteroidSprites.at(i).asteroidSprite.getScale().x))
 				{
 					asteroid->DestroyAsteroid(i);
 					cannon->DeleteBullet(j);
+					break;
 				}
 			}
 		}
+
 
 		if (GameStates::ePlaying == _gameState)
 		{
