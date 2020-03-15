@@ -134,7 +134,14 @@ void Asteroid::RandomiseAsteroidOffset()
 
 void Asteroid::DeleteAsteroid(int index)
 {
-	asteroidSprites.erase(asteroidSprites.begin() + index);
+	try
+	{
+		asteroidSprites.erase(asteroidSprites.begin() + index);
+	}
+	catch (const std::exception & e)
+	{
+		log_err << "Trying to delete no longer existing asteroid";
+	}
 }
 
 void Asteroid::DestroyAsteroid(int index)
@@ -145,14 +152,14 @@ void Asteroid::DestroyAsteroid(int index)
 		sprite.setPosition(asteroidSprites.at(index).asteroidSprite.getPosition().x, asteroidSprites.at(index).asteroidSprite.getPosition().y);
 		ExplosionSprite es = { sprite, 0, asteroidSprites.at(index).asteroidSprite.getScale().x, asteroidSprites.at(index).asteroidSprite.getRotation() };
 		explosionSprites.push_back(es);
+
+		DeleteAsteroid(index);
+		log << "Asteroid with index " << index << "was destroyed";
 	}
 	catch (const std::exception & e)
 	{
 		log_err << "Trying to get asteroid position from no longer existing asteroid";
 	}
-
-	DeleteAsteroid(index);
-	log << "Asteroid with index " << index << "was destroyed";
 }
 
 const std::vector<AsteroidSprite> &Asteroid::GetSprites() const
