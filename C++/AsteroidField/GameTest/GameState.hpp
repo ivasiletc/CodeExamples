@@ -40,6 +40,9 @@ private:
 
 	sf::RectangleShape _gameOverFlash;
 
+	sf::Clock score_clock;
 	int _score;
 
+	float _asteroidSpawnFrequency;
+	float _cannonShootingFrequency;
 };

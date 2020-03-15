@@ -8,6 +8,8 @@
 GameState::GameState(GameDataRef data) : _data(data)
 {
 	log << "constructor was called";
+	_asteroidSpawnFrequency = ASTEROID_SPAWN_FREQUENCY;
+	_cannonShootingFrequency = CANNON_SHOOTING_FREQUENCY;
 }
 
 void GameState::Init()
@@ -16,6 +18,8 @@ void GameState::Init()
 
 	this->_data->assets.LoadTexture("Game Background", GAME_BACKGROUND_FILEPATH);
 	this->_data->assets.LoadTexture("Space", SPACE_FILEPATH);
+
+	this->_data->assets.LoadFont("Castelar Font", FONT_FILEPATH);
 
 	this->_data->assets.LoadTexture("Ship turning left", SHIP_LEFT_FILEPATH);
 	this->_data->assets.LoadTexture("Ship turning right", SHIP_RIGHT_FILEPATH);
@@ -28,6 +32,15 @@ void GameState::Init()
 	this->_data->assets.LoadTexture("Asteroid 2", ASTEROID2_FILEPATH);
 	this->_data->assets.LoadTexture("Asteroid 3", ASTEROID3_FILEPATH);
 
+	this->_data->assets.LoadTexture("Explosion frame 0", ASTEROID_EXPLOSION0_FILEPATH);
+	this->_data->assets.LoadTexture("Explosion frame 1", ASTEROID_EXPLOSION1_FILEPATH);
+	this->_data->assets.LoadTexture("Explosion frame 2", ASTEROID_EXPLOSION2_FILEPATH);
+	this->_data->assets.LoadTexture("Explosion frame 3", ASTEROID_EXPLOSION3_FILEPATH);
+	this->_data->assets.LoadTexture("Explosion frame 4", ASTEROID_EXPLOSION4_FILEPATH);
+	this->_data->assets.LoadTexture("Explosion frame 5", ASTEROID_EXPLOSION5_FILEPATH);
+	this->_data->assets.LoadTexture("Explosion frame 6", ASTEROID_EXPLOSION6_FILEPATH);
+	this->_data->assets.LoadTexture("Explosion frame 7", ASTEROID_EXPLOSION7_FILEPATH);
+
 
 	ship = new SpaceShip(_data);
 	asteroid = new Asteroid(_data);
@@ -35,6 +48,7 @@ void GameState::Init()
 	cannon = new Cannon(_data);
 
 	_background.setTexture(this->_data->assets.GetTexture("Game Background"));
+	_score = 0;
 
 	_gameState = GameStates::eReady;
 }
@@ -72,48 +86,62 @@ void GameState::Update(float dt)
 	if (GameStates::ePlaying == _gameState)
 	{
 		asteroid->MoveAsteroids(dt);
+		asteroid->MoveExplosions(dt);
 
-		if (asteroid_clock.getElapsedTime().asSeconds() > ASTEROID_SPAWN_FREQUENCY)
+		if (asteroid_clock.getElapsedTime().asSeconds() > 1)
 		{
-			asteroid->RandomiseAsteroidOffset();
-			asteroid->SpawnAsteroid();
-			asteroid_clock.restart();
+			_asteroidSpawnFrequency += ASTEROID_SPAWN_FREQUENCY_INCREASING;
 		}
 
-		if (cannon_clock.getElapsedTime().asSeconds() > CANNON_SHOOTING_FREQUENCY)
+		if (_asteroidSpawnFrequency > 0)
 		{
-			cannon->Shoot(ship->GetSprite().getPosition().x - 5, ship->GetSprite().getPosition().y - ship->GetSprite().getGlobalBounds().height / 2);
-			cannon_clock.restart();
+			if (asteroid_clock.getElapsedTime().asSeconds() > 1 / _asteroidSpawnFrequency)
+			{
+				asteroid->RandomiseAsteroidOffset();
+				asteroid->SpawnAsteroid();
+				asteroid_clock.restart();
+			}
 		}
 
+		if (_cannonShootingFrequency > 0)
+		{
+			if (cannon_clock.getElapsedTime().asSeconds() > 1 / _cannonShootingFrequency)
+			{
+				cannon->Shoot(ship->GetSprite().getPosition().x - 5, ship->GetSprite().getPosition().y - ship->GetSprite().getGlobalBounds().height / 2);
+				cannon_clock.restart();
+			}
+		}
 
 		ship->Update(dt);
 		cannon->Update(dt);
 
-		std::vector<sf::Sprite> asteroidSprites = asteroid->GetSprites();
+		std::vector<AsteroidSprite> asteroidSprites = asteroid->GetSprites();
 		std::vector<sf::Sprite> bulletSprites = cannon->GetSprites();
 
 		for (int i = 0; i < asteroidSprites.size(); i++)
 		{
-			if (collision.CheckSpriteCollision(ship->GetSprite(), 0.625f, asteroidSprites.at(i), asteroidSprites.at(i).getScale().x))
+			if (collision.CheckSpriteCollision(ship->GetSprite(), 0.625f, asteroidSprites.at(i).asteroidSprite, asteroidSprites.at(i).asteroidSprite.getScale().x))
 			{
 				_gameState = GameStates::eGameOver;
 			}
 
 			for (int j = 0; j < bulletSprites.size(); j++)
 			{
-				if (collision.CheckSpriteCollision(bulletSprites.at(j), 1, asteroidSprites.at(i), asteroidSprites.at(i).getScale().x))
+				if (collision.CheckSpriteCollision(bulletSprites.at(j), 1, asteroidSprites.at(i).asteroidSprite, asteroidSprites.at(i).asteroidSprite.getScale().x))
 				{
-					asteroid->DeleteAsteroid(i);
+					asteroid->DestroyAsteroid(i);
 					cannon->DeleteBullet(j);
-					log << "Asteroid sprite deleted";
 				}
 			}
 		}
 
 		if (GameStates::ePlaying == _gameState)
 		{
-			//@TODO score system
+			if (score_clock.getElapsedTime().asSeconds() > SCORE_INCREASING_TIME)
+			{
+				_score++;
+				score_clock.restart();
+			}
 		}
 	}
 
@@ -130,6 +158,7 @@ void GameState::Draw(float dt)
 
 	space->DrawSpace();
 	asteroid->DrawAsteroids();
+	asteroid->DrawExplosions();
 	ship->Draw();
 	cannon->Draw();
 
