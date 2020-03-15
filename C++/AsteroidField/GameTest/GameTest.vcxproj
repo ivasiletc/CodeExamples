@@ -149,6 +149,7 @@
     <ClCompile Include="Cannon.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameOverState.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="logger.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="Collision.hpp" />
     <ClInclude Include="DEFINITIONS.hpp" />
     <ClInclude Include="Game.hpp" />
+    <ClInclude Include="GameOverState.hpp" />
     <ClInclude Include="GameState.hpp" />
     <ClInclude Include="InputManager.hpp" />
     <ClInclude Include="logger.h" />

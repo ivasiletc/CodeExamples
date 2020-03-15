@@ -1,5 +1,7 @@
-﻿  Cannon.cpp
-E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\Cannon.cpp(12,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\Cannon.cpp(12,21): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\Cannon.cpp(27,20): warning C4018: '<': signed/unsigned mismatch
+﻿  Asteroid.cpp
+E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\DEFINITIONS.hpp(23,1): warning C4005: 'ASTEROID_EXPLOSION_DURATION': macro redefinition
+E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\DEFINITIONS.hpp(20): message : see previous definition of 'ASTEROID_EXPLOSION_DURATION'
+E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\Asteroid.cpp(38,21): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\Asteroid.cpp(70,21): warning C4018: '<': signed/unsigned mismatch
+E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\Asteroid.cpp(149,32): warning C4101: 'e': unreferenced local variable
   GameTest.vcxproj -> E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\Debug\GameTest.exe
