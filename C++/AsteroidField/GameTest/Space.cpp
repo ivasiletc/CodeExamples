@@ -20,6 +20,11 @@ void Space::MoveSpace(float dt)
 		sf::Vector2f position = _spaceSprites.at(i).getPosition();
 		float movement = SPACESHIP_FORWARD_MOVEMENT_SPEED * dt;
 
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		{
+			movement += 10.0f;
+		}
+
 		_spaceSprites.at(i).move(0.0f, movement);
 
 		if (_spaceSprites.at(i).getPosition().y > 0)

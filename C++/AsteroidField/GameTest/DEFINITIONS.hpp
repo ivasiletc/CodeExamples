@@ -40,6 +40,7 @@
 #define SHIP_LEFT_FILEPATH "Resources/ship_left.png"
 #define SHIP_RIGHT_FILEPATH "Resources/ship_right.png"
 #define SHIP_MAIN_FILEPATH "Resources/ship_main.png"
+#define SHIP_MAIN_FLAME_FILEPATH "Resources/ship_main_flame.png"
 
 #define ASTEROID_TEXTURES_AMOUNT 4
 #define ASTEROID0_FILEPATH "Resources/asteroid0.png"
@@ -64,6 +65,7 @@
 #define SHIP_STATE_MAIN 1
 #define SHIP_STATE_TURNING_LEFT 2
 #define SHIP_STATE_TURNING_RIGHT 3
+#define SHIP_STATE_MAIN_FLAME 4
 
 enum GameStates
 {

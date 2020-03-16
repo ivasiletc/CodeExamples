@@ -3,6 +3,7 @@
 SpaceShip::SpaceShip(GameDataRef data) : _data(data)
 {
 	_animationFrames.push_back(this->_data->assets.GetTexture("Ship main"));
+	_animationFrames.push_back(this->_data->assets.GetTexture("Ship main flame"));
 	_animationFrames.push_back(this->_data->assets.GetTexture("Ship turning left"));
 	_animationFrames.push_back(this->_data->assets.GetTexture("Ship turning right"));
 
@@ -47,7 +48,6 @@ void SpaceShip::Draw()
 
 void SpaceShip::Update(float dt)
 {
-
 	if (SHIP_STATE_TURNING_LEFT == _shipState)
 	{
 		_shipSprite.setTexture(_data->assets.GetTexture("Ship turning left"));
@@ -69,6 +69,10 @@ void SpaceShip::Update(float dt)
 		_shipSprite.setTexture(_data->assets.GetTexture("Ship main"));
 	}
 
+	if (SHIP_STATE_MAIN_FLAME == _shipState)
+	{
+		_shipSprite.setTexture(_data->assets.GetTexture("Ship main flame"));
+	}
 }
 
 void SpaceShip::PressKey()
@@ -86,6 +90,11 @@ void SpaceShip::PressKey()
 	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
 		_shipState = SHIP_STATE_MAIN;
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	{
+		_shipState = SHIP_STATE_MAIN_FLAME;
 	}
 }
 

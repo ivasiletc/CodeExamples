@@ -69,7 +69,7 @@ void Asteroid::MoveAsteroids(float dt)
 {
 	for ( int i = 0; i < asteroidSprites.size(); i++)
 	{
-		if (asteroidSprites.at(i).asteroidSprite.getPosition().x < 0 - asteroidSprites.at(i).asteroidSprite.getLocalBounds().width			 ||
+		if (asteroidSprites.at(i).asteroidSprite.getPosition().x < 0 - asteroidSprites.at(i).asteroidSprite.getLocalBounds().width			   ||
 			asteroidSprites.at(i).asteroidSprite.getPosition().x > SCREEN_WIDTH + asteroidSprites.at(i).asteroidSprite.getLocalBounds().width  ||
 			asteroidSprites.at(i).asteroidSprite.getPosition().y > SCREEN_HEIGHT + asteroidSprites.at(i).asteroidSprite.getLocalBounds().height)
 		{
@@ -80,6 +80,11 @@ void Asteroid::MoveAsteroids(float dt)
 		{
 			sf::Vector2f position = asteroidSprites.at(i).asteroidSprite.getPosition();
 			float movement = ASTEROID_MOVEMENT_SPEED * dt;
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+			{
+				movement += 10.0f;
+			}
 
 			asteroidSprites.at(i).asteroidSprite.move(asteroidSprites.at(i).direction, movement);
 			asteroidSprites.at(i).asteroidSprite.setRotation(asteroidSprites.at(i).defaultRotationPosition += asteroidSprites.at(i).rotationVelocity);
@@ -92,6 +97,11 @@ void Asteroid::MoveExplosions(float dt)
 	for (unsigned short int i = 0; i < explosionSprites.size(); i++)
 	{
 		float movement = (SPACESHIP_FORWARD_MOVEMENT_SPEED + ASTEROID_MOVEMENT_SPEED) * dt;
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		{
+			movement += 50.0f;
+		}
 
 		if (explosionSprites.at(i).clock.getElapsedTime().asSeconds() > ASTEROID_EXPLOSION_DURATION / animationFrames.size())
 		{
