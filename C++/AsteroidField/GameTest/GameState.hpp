@@ -9,6 +9,7 @@
 #include "SpaceShip.hpp"
 #include "Asteroid.hpp"
 #include "Cannon.hpp"
+#include "HUD.hpp"
 
 class GameState : public State
 {
@@ -30,6 +31,7 @@ private:
 	Asteroid* asteroid;
 	SpaceShip* ship;
 	Cannon* cannon;
+	HUD* hud;
 
 	Collision collision;
 

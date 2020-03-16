@@ -34,7 +34,7 @@ void MainMenuState::HandleInput()
             _data->window.close();
         }
 
-        if (this->_data->input.IsSpriteClicked(this->_playButton, sf::Mouse::Left, this->_data->window))
+        if (this->_data->input.IsSpriteClicked(this->_playButton, sf::Mouse::Left, this->_data->window) || sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
         {
             // Switch To Game
             this->_data->machine.AddState(StateRef(new GameState(_data)), true);

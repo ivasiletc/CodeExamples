@@ -24,6 +24,7 @@ void GameState::Init()
 	this->_data->assets.LoadTexture("Ship turning left", SHIP_LEFT_FILEPATH);
 	this->_data->assets.LoadTexture("Ship turning right", SHIP_RIGHT_FILEPATH);
 	this->_data->assets.LoadTexture("Ship main", SHIP_MAIN_FILEPATH);
+	this->_data->assets.LoadTexture("Ship main flame", SHIP_MAIN_FLAME_FILEPATH);
 
 	this->_data->assets.LoadTexture("Bullet", BULLET_FILEPATH);
 
@@ -46,9 +47,12 @@ void GameState::Init()
 	asteroid = new Asteroid(_data);
 	space = new Space(_data);
 	cannon = new Cannon(_data);
+	hud = new HUD(_data);
 
 	_background.setTexture(this->_data->assets.GetTexture("Game Background"));
 	_score = 0;
+
+	hud->UpdateScore(_score);
 
 	_gameState = GameStates::eReady;
 }
@@ -146,6 +150,7 @@ void GameState::Update(float dt)
 			if (score_clock.getElapsedTime().asSeconds() > SCORE_INCREASING_TIME)
 			{
 				_score++;
+				hud->UpdateScore(_score);
 				score_clock.restart();
 			}
 		}
@@ -167,6 +172,8 @@ void GameState::Draw(float dt)
 	asteroid->DrawExplosions();
 	ship->Draw();
 	cannon->Draw();
+
+	hud->Draw();
 
 	this->_data->window.display();
 }
