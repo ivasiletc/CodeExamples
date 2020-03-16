@@ -1,10 +1,88 @@
-﻿  Asteroid.cpp
+﻿  AssetManager.cpp
+  Asteroid.cpp
 E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\Asteroid.cpp(38,21): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\Asteroid.cpp(151,32): warning C4101: 'e': unreferenced local variable
 E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\Asteroid.cpp(169,32): warning C4101: 'e': unreferenced local variable
+  Cannon.cpp
+E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\Cannon.cpp(12,24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\Cannon.cpp(12,21): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Collision.cpp
+  Game.cpp
+E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\Game.cpp(11,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  GameOverState.cpp
+E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\GameOverState.cpp(56,72): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\GameOverState.cpp(63,76): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  GameState.cpp
+E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\GameState.cpp(114,92): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\GameState.cpp(114,53): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+  HUD.cpp
+  InputManager.cpp
+E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\InputManager.cpp(7,140): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\InputManager.cpp(7,108): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\InputManager.cpp(7,80): warning C4244: 'argument': conversion from 'const T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\InputManager.cpp(7,56): warning C4244: 'argument': conversion from 'const T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+  logger.cpp
+  main.cpp
+  MainMenuState.cpp
+  Space.cpp
+  SpaceShip.cpp
+E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\SpaceShip.cpp(12,53): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+  SplashState.cpp
+  StateMachine.cpp
   Generating code
-  1 of 870 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+  Previous IPDB not found, fall back to full compilation.
+  All 870 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
   GameTest.vcxproj -> E:\Рабочий стол\GitHub\C++\AsteroidField\GameTest\x64\Release\GameTest.exe

@@ -12,7 +12,7 @@
 #define SPACESHIP_MASS 1.0f
 
 #define ASTEROID_SPAWN_FREQUENCY 0.5f					// asteroid/second
-#define ASTEROID_SPAWN_FREQUENCY_INCREASING 5.25f		// asteroid/second
+#define ASTEROID_SPAWN_FREQUENCY_INCREASING 0.25f		// asteroid/second
 /*   #############   */
 
 /*   Game settings   */

@@ -40,8 +40,6 @@ private:
 
 	int _gameState;
 
-	sf::RectangleShape _gameOverFlash;
-
 	sf::Clock score_clock;
 	int _score;
 
