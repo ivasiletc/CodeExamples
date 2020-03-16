@@ -7,6 +7,7 @@ e:\рабочий стол\github\c++\asteroidfield\gametest\x64\release\mainmen
 e:\рабочий стол\github\c++\asteroidfield\gametest\x64\release\main.obj
 e:\рабочий стол\github\c++\asteroidfield\gametest\x64\release\logger.obj
 e:\рабочий стол\github\c++\asteroidfield\gametest\x64\release\inputmanager.obj
+e:\рабочий стол\github\c++\asteroidfield\gametest\x64\release\hud.obj
 e:\рабочий стол\github\c++\asteroidfield\gametest\x64\release\gamestate.obj
 e:\рабочий стол\github\c++\asteroidfield\gametest\x64\release\gameoverstate.obj
 e:\рабочий стол\github\c++\asteroidfield\gametest\x64\release\game.obj
@@ -24,5 +25,6 @@ e:\рабочий стол\github\c++\asteroidfield\gametest\x64\release\gametes
 e:\рабочий стол\github\c++\asteroidfield\gametest\x64\release\gametest.tlog\cl.write.1.tlog
 e:\рабочий стол\github\c++\asteroidfield\gametest\x64\release\gametest.tlog\gametest.write.1u.tlog
 e:\рабочий стол\github\c++\asteroidfield\gametest\x64\release\gametest.tlog\link.command.1.tlog
+e:\рабочий стол\github\c++\asteroidfield\gametest\x64\release\gametest.tlog\link.delete.1.tlog
 e:\рабочий стол\github\c++\asteroidfield\gametest\x64\release\gametest.tlog\link.read.1.tlog
 e:\рабочий стол\github\c++\asteroidfield\gametest\x64\release\gametest.tlog\link.write.1.tlog
